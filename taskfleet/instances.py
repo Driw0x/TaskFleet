@@ -1,7 +1,9 @@
 """Strict validation of JSON warehouse instances."""
 
 import json
+from collections import deque
 from pathlib import Path
+import random
 
 from .models import Grid, Instance, Resource, Robot, Task, TaskState
 from .paths import shortest_path
@@ -148,3 +150,54 @@ def loads_instance(content: str | bytes) -> Instance:
 
 def load_instance(path: str | Path) -> Instance:
     return loads_instance(Path(path).read_text(encoding="utf-8"))
+
+
+def generate_instance(*, width: int, height: int, robot_count: int, task_count: int,
+                      seed: int, horizon: int = 100, obstacles: list | None = None,
+                      resources: list | None = None) -> Instance:
+    """Generate feasible V1 tasks in robot-accessible components of a fixed grid.
+
+    Keep obstacles/resources, replace robots/tasks and omit old robot downtime.
+    Overlapping positions are allowed by V1, including on a one-cell grid.
+    Feasibility does not promise completion within the requested horizon.
+    """
+    _integer(robot_count, "Nombre de robots")
+    _integer(task_count, "Nombre de tâches")
+    _integer(seed, "Graine aléatoire")
+    if task_count and not robot_count:
+        raise ValueError("Au moins un robot est nécessaire pour générer des tâches")
+    environment = from_dict({"width": width, "height": height, "horizon": horizon, "seed": seed,
+                             "robots": [], "tasks": [],
+                             "obstacles": [] if obstacles is None else obstacles,
+                             "resources": [] if resources is None else resources})
+    grid = environment.grid
+    cells = [(x, y) for x in range(width) for y in range(height) if grid.accessible((x, y))]
+    if robot_count and not cells:
+        raise ValueError("Grille trop petite : aucune case libre pour placer les robots")
+    # Index components once, without retrying random unreachable endpoints.
+    components = {}
+    for cell in cells:
+        if cell in components:
+            continue
+        component = [cell]
+        components[cell] = component
+        frontier = deque([cell])
+        while frontier:
+            x, y = frontier.popleft()
+            for neighbour in ((x + 1, y), (x, y + 1), (x - 1, y), (x, y - 1)):
+                if grid.accessible(neighbour) and neighbour not in components:
+                    components[neighbour] = component
+                    component.append(neighbour)
+                    frontier.append(neighbour)
+    rng = random.Random(seed)
+    data = environment.to_dict()
+    for index in range(robot_count):
+        data["robots"].append({"id": f"r{index + 1:03d}", "position": list(rng.choice(cells)),
+                               "capacity": rng.randint(1, 3)})
+    for index in range(task_count):
+        robot = rng.choice(data["robots"])
+        component = components[tuple(robot["position"])]
+        data["tasks"].append({"id": f"t{index + 1:03d}", "pickup": list(rng.choice(component)),
+                              "destination": list(rng.choice(component)),
+                              "load": rng.randint(1, robot["capacity"]), "handling_ticks": 1})
+    return from_dict(data)
