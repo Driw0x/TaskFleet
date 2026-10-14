@@ -1,0 +1,19 @@
+{
+  "width": 5,
+  "height": 3,
+  "obstacles": [[2, 0], [2, 1]],
+  "robots": [
+    {"id": "r1", "position": [0, 0], "capacity": 2},
+    {"id": "r2", "position": [0, 0], "capacity": 1}
+  ],
+  "tasks": [
+    {"id": "t1", "pickup": [1, 0], "destination": [4, 0], "load": 2, "handling_ticks": 2, "deadline": 15},
+    {"id": "t2", "pickup": [1, 0], "destination": [4, 0], "handling_ticks": 2}
+  ],
+  "resources": [
+    {"id": "pickup", "position": [1, 0], "capacity": 1},
+    {"id": "delivery", "position": [4, 0], "capacity": 1}
+  ],
+  "horizon": 20,
+  "seed": 42
+}
