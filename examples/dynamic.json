@@ -1,0 +1,17 @@
+{
+  "width": 5, "height": 2, "horizon": 30, "seed": 42,
+  "robots": [
+    {"id": "r1", "position": [0, 0], "capacity": 2},
+    {"id": "r2", "position": [0, 1], "capacity": 1}
+  ],
+  "tasks": [
+    {"id": "t1", "pickup": [1, 0], "destination": [4, 0], "load": 2, "handling_ticks": 3, "deadline": 12},
+    {"id": "t2", "pickup": [1, 0], "destination": [4, 0], "arrival_tick": 3},
+    {"id": "t3", "pickup": [0, 1], "destination": [4, 0], "arrival_tick": 4}
+  ],
+  "resources": [
+    {"id": "pickup", "position": [1, 0], "capacity": 1},
+    {"id": "delivery", "position": [4, 0], "capacity": 1}
+  ],
+  "unavailability": [{"robot_id": "r1", "start_tick": 3, "end_tick": 6}]
+}

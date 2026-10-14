@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from .models import Grid, Instance, Resource, Robot, Task
+from .models import Grid, Instance, Resource, Robot, Task, TaskState
 from .paths import shortest_path
 
 
@@ -54,7 +54,7 @@ def _id(value, existing: dict, label: str) -> str:
 def from_dict(data: dict) -> Instance:
     """Build a fresh, validated instance; input data is never modified."""
     data = _object(data, {"width", "height", "robots", "tasks"},
-                   {"obstacles", "resources", "horizon", "seed"}, "instance")
+                   {"obstacles", "resources", "horizon", "seed", "unavailability"}, "instance")
     grid = Grid(_integer(data["width"], "width", 1),
                 _integer(data["height"], "height", 1))
     obstacles = [_position(p, grid, "obstacles", allow_obstacle=True)
@@ -90,7 +90,7 @@ def from_dict(data: dict) -> Instance:
     for index, entry in enumerate(_array(data["tasks"], "tasks")):
         label = f"tasks[{index}]"
         entry = _object(entry, {"id", "pickup", "destination"},
-                        {"load", "handling_ticks", "deadline"}, label)
+                        {"load", "handling_ticks", "deadline", "arrival_tick"}, label)
         task_id = _id(entry["id"], tasks, label)
         deadline = entry.get("deadline")
         if deadline is not None:
@@ -99,7 +99,9 @@ def from_dict(data: dict) -> Instance:
                     _position(entry["destination"], grid, f"{label}.destination"),
                     _integer(entry.get("load", 1), f"{label}.load", 1),
                     _integer(entry.get("handling_ticks", 1), f"{label}.handling_ticks", 1),
-                    deadline)
+                    deadline, _integer(entry.get("arrival_tick", 0), f"{label}.arrival_tick"))
+        if task.arrival_tick > 0:
+            task.state = TaskState.SCHEDULED
         if shortest_path(grid, task.pickup, task.destination) is None:
             raise ValueError(f"{label}: destination is unreachable from pickup")
         capable = [r for r in robots.values() if r.capacity >= task.load]
@@ -108,7 +110,22 @@ def from_dict(data: dict) -> Instance:
         if not any(shortest_path(grid, r.position, task.pickup) is not None for r in capable):
             raise ValueError(f"{label}: pickup is unreachable by every capable robot")
         tasks[task_id] = task
-    return Instance(grid, robots, tasks, resources, horizon, seed)
+    unavailability = []
+    for index, entry in enumerate(_array(data.get("unavailability", []), "unavailability")):
+        label = f"unavailability[{index}]"
+        entry = _object(entry, {"robot_id", "start_tick", "end_tick"}, set(), label)
+        robot_id = entry["robot_id"]
+        if not isinstance(robot_id, str) or robot_id not in robots:
+            raise ValueError(f"{label}: unknown robot {robot_id!r}")
+        start = _integer(entry["start_tick"], f"{label}.start_tick")
+        end = _integer(entry["end_tick"], f"{label}.end_tick")
+        if end <= start:
+            raise ValueError(f"{label}: end_tick must be greater than start_tick")
+        if any(e["robot_id"] == robot_id and start < e["end_tick"] and e["start_tick"] < end
+               for e in unavailability):
+            raise ValueError(f"{label}: overlapping unavailability periods")
+        unavailability.append({"robot_id": robot_id, "start_tick": start, "end_tick": end})
+    return Instance(grid, robots, tasks, resources, horizon, seed, unavailability)
 
 
 def _unique_keys(pairs: list[tuple]) -> dict:

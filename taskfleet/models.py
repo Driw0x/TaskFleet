@@ -17,6 +17,7 @@ class RobotState(StrEnum):
 
 
 class TaskState(StrEnum):
+    SCHEDULED = "scheduled"
     PENDING = "pending"
     ASSIGNED = "assigned"
     PICKED_UP = "picked_up"
@@ -45,10 +46,11 @@ class Robot:
     path: list[Position] = field(default_factory=list)
     handling_remaining: int = 0
     resource_id: str | None = None
+    unavailable: bool = False
 
     @property
     def available(self) -> bool:
-        return self.state == RobotState.IDLE
+        return self.state == RobotState.IDLE and not self.unavailable
 
 
 @dataclass
@@ -59,6 +61,7 @@ class Task:
     load: int = 1
     handling_ticks: int = 1
     deadline: int | None = None
+    arrival_tick: int = 0
     state: TaskState = TaskState.PENDING
     robot_id: str | None = None
     completed_tick: int | None = None
@@ -80,6 +83,7 @@ class Instance:
     resources: dict[str, Resource]
     horizon: int = 100
     seed: int | None = None
+    unavailability: list[dict] = field(default_factory=list)
 
     def to_dict(self) -> dict:
         """Export configuration in the same format accepted by the loader."""
@@ -94,7 +98,8 @@ class Instance:
             "tasks": [
                 {"id": t.id, "pickup": list(t.pickup),
                  "destination": list(t.destination), "load": t.load,
-                 "handling_ticks": t.handling_ticks, "deadline": t.deadline}
+                 "handling_ticks": t.handling_ticks, "deadline": t.deadline,
+                 "arrival_tick": t.arrival_tick}
                 for t in sorted(self.tasks.values(), key=lambda t: t.id)
             ],
             "resources": [
@@ -103,4 +108,6 @@ class Instance:
             ],
             "horizon": self.horizon,
             "seed": self.seed,
+            "unavailability": [dict(event) for event in sorted(
+                self.unavailability, key=lambda e: (e["start_tick"], e["robot_id"], e["end_tick"]))],
         }

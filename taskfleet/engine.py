@@ -30,9 +30,11 @@ class Simulation:
         self.resources = initial.resources
         self.horizon = initial.horizon
         self.seed = initial.seed
+        self._unavailability = initial.unavailability
         self.tick = 0
         self.events: list[dict] = []
         self._resources_at = {r.position: r for r in self.resources.values()}
+        self._apply_dynamic_events()
         self.check_invariants()
         self.snapshots = [self.snapshot()]
 
@@ -52,9 +54,22 @@ class Simulation:
         """Detached current state; strategies cannot modify the live engine."""
         return Observation(self.tick, self.grid,
                            tuple(deepcopy(r) for r in sorted(self.robots.values(), key=lambda r: r.id)),
-                           tuple(deepcopy(t) for t in sorted(self.tasks.values(), key=lambda t: t.id)
+                           tuple(deepcopy(t) for t in sorted(self.tasks.values(), key=lambda t: (t.arrival_tick, t.id))
                                  if t.state == TaskState.PENDING))
 
+    def _apply_dynamic_events(self) -> None:
+        for task in sorted(self.tasks.values(), key=lambda t: (t.arrival_tick, t.id)):
+            if task.state == TaskState.SCHEDULED and task.arrival_tick <= self.tick:
+                task.state = TaskState.PENDING
+                self._event("task_arrived", task_id=task.id)
+        for robot in sorted(self.robots.values(), key=lambda r: r.id):
+            unavailable = any(e["robot_id"] == robot.id and e["start_tick"] <= self.tick < e["end_tick"]
+                              for e in self._unavailability)
+            if unavailable != robot.unavailable:
+                robot.unavailable = unavailable
+                self._event("robot_unavailable" if unavailable else "robot_resumed",
+                            robot_id=robot.id, task_id=robot.task_id,
+                            resource_id=robot.resource_id)
 
     def _allocate(self) -> None:
         if self.strategy == "manual":
@@ -93,6 +108,10 @@ class Simulation:
         if task_id not in self.tasks:
             raise ValueError(f"Unknown task {task_id!r}")
         robot, task = self.robots[robot_id], self.tasks[task_id]
+        if task.arrival_tick > self.tick:
+            raise ValueError(f"Task {task_id!r} has not arrived")
+        if robot.unavailable:
+            raise ValueError(f"Robot {robot_id!r} is temporarily unavailable")
         if not robot.available:
             raise ValueError(f"Robot {robot_id!r} is already executing a task")
         if task.state != TaskState.PENDING:
@@ -153,15 +172,16 @@ class Simulation:
                         task_id=task.id, state=task.state.value, robot_state=report["state"])
 
     def step(self) -> dict:
-        """Advance one tick with one action per robot."""
+        """Advance one tick; arrivals and handling never occur in the same action."""
         if self.finished:
             raise ValueError("Simulation horizon reached")
         self._allocate()
         self.tick += 1
+        self._apply_dynamic_events()
         releases = []
         for robot_id in sorted(self.robots):
             robot = self.robots[robot_id]
-            if robot.available:
+            if robot.unavailable or robot.available:
                 continue
             if robot.path:
                 previous = robot.position
@@ -200,12 +220,14 @@ class Simulation:
             "robots": {
                 r.id: {"position": list(r.position), "capacity": r.capacity,
                        "state": r.state.value, "available": r.available,
+                       "unavailable": r.unavailable,
                        "task_id": r.task_id, "handling_remaining": r.handling_remaining,
                        "resource_id": r.resource_id, "path": [list(p) for p in r.path]}
                 for r in sorted(self.robots.values(), key=lambda r: r.id)
             },
             "tasks": {
                 t.id: {"state": t.state.value, "robot_id": t.robot_id,
+                       "arrival_tick": t.arrival_tick,
                        "completed_tick": t.completed_tick,
                        "late": t.completed_tick is not None and t.deadline is not None
                        and t.completed_tick > t.deadline}
@@ -247,6 +269,7 @@ class Simulation:
             assert robot.task_id in self.tasks and robot.task_id not in active_tasks
             active_tasks.add(robot.task_id)
             task = self.tasks[robot.task_id]
+            assert task.arrival_tick <= self.tick
             assert task.robot_id == robot.id and task.load <= robot.capacity
             assert task.state == (TaskState.ASSIGNED if robot.state in pickup_states
                                   else TaskState.PICKED_UP)
@@ -268,8 +291,9 @@ class Simulation:
                 assert robot.state in handling_states
 
         for task in self.tasks.values():
-            if task.state == TaskState.PENDING:
+            if task.state in {TaskState.PENDING, TaskState.SCHEDULED}:
                 assert task.robot_id is None and task.completed_tick is None
+                assert (task.arrival_tick > self.tick) == (task.state == TaskState.SCHEDULED)
             elif task.state == TaskState.COMPLETED:
                 assert task.robot_id in self.robots
                 assert task.completed_tick is not None and 1 <= task.completed_tick <= self.tick
