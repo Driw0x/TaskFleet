@@ -13,7 +13,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("instance", type=Path, help="JSON instance path")
     parser.add_argument("--assign", nargs=2, action="append", default=[],
                         metavar=("ROBOT", "TASK"), help="explicit assignment (repeatable)")
-    parser.add_argument("--strategy", choices=["manual", "fifo", "cpsat"], default="manual")
+    parser.add_argument("--strategy", choices=["manual", "fifo", "cpsat", "cnp"], default="manual")
     parser.add_argument("--solver-budget", type=float, default=1.0,
                         help="CP-SAT deterministic time units per phase (default: 1)")
     parser.add_argument("--until", type=int, help="absolute ending tick (default: instance horizon)")

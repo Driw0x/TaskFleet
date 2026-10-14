@@ -104,4 +104,7 @@ def allocate(strategy: str, observation: Observation, budget: float) -> dict:
         return fifo(observation)
     if strategy == "cpsat":
         return cpsat(observation, budget)
+    if strategy == "cnp":
+        from .cnp import contract_net
+        return contract_net(observation)
     raise ValueError(f"Unknown allocation strategy {strategy!r}")

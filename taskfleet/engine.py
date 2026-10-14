@@ -13,7 +13,7 @@ from .paths import shortest_path
 
 class Simulation:
     def __init__(self, instance: Instance, strategy: str = "manual", *, solver_budget: float = 1.0):
-        if strategy not in {"manual", "fifo", "cpsat"}:
+        if strategy not in {"manual", "fifo", "cpsat", "cnp"}:
             raise ValueError(f"Unknown allocation strategy {strategy!r}")
         if isinstance(solver_budget, bool) or not isinstance(solver_budget, (int, float)) or not math.isfinite(solver_budget) or solver_budget <= 0:
             raise ValueError("solver_budget must be a finite positive number")
@@ -65,6 +65,8 @@ class Simulation:
         start = perf_counter()
         decision = allocate(self.strategy, observation, self.solver_budget)
         self.strategy_seconds += perf_counter() - start
+        for message in decision.pop("messages", []):
+            self._event("message", **message)
         self._event("allocation", strategy=self.strategy, **decision)
         for robot_id, task_id in decision["assignments"]:
             try:
@@ -144,6 +146,11 @@ class Simulation:
                         late=task.deadline is not None and self.tick > task.deadline)
             robot.state = RobotState.IDLE
             robot.task_id = None
+        if self.strategy == "cnp":
+            from .cnp import RobotAgent
+            report = RobotAgent(self.grid, deepcopy(robot), robot.task_id).execution_state()
+            self._event("message", type="execution", sender=report["robot_id"], recipient="all",
+                        task_id=task.id, state=task.state.value, robot_state=report["state"])
 
     def step(self) -> dict:
         """Advance one tick with one action per robot."""
