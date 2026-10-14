@@ -13,13 +13,16 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("instance", type=Path, help="JSON instance path")
     parser.add_argument("--assign", nargs=2, action="append", default=[],
                         metavar=("ROBOT", "TASK"), help="explicit assignment (repeatable)")
+    parser.add_argument("--strategy", choices=["manual", "fifo", "cpsat"], default="manual")
+    parser.add_argument("--solver-budget", type=float, default=1.0,
+                        help="CP-SAT deterministic time units per phase (default: 1)")
     parser.add_argument("--until", type=int, help="absolute ending tick (default: instance horizon)")
     parser.add_argument("--trace", type=Path, help="write the complete JSON trace")
     parser.add_argument("--verify-repeat", action="store_true", help="repeat and compare complete traces")
     arguments = parser.parse_args(argv)
     try:
         instance = load_instance(arguments.instance)
-        simulation = Simulation(instance)
+        simulation = Simulation(instance, arguments.strategy, solver_budget=arguments.solver_budget)
         print("Initial state:")
         print(json.dumps(simulation.snapshot(), indent=2, ensure_ascii=False))
         for robot_id, task_id in arguments.assign:
@@ -31,7 +34,7 @@ def main(argv: list[str] | None = None) -> int:
         print("Events:")
         print(json.dumps(trace["events"], indent=2, ensure_ascii=False))
         if arguments.verify_repeat:
-            repeat = Simulation(instance)
+            repeat = Simulation(instance, arguments.strategy, solver_budget=arguments.solver_budget)
             for robot_id, task_id in arguments.assign:
                 repeat.assign(robot_id, task_id)
             repeat.run(arguments.until)

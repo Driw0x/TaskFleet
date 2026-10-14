@@ -1,14 +1,26 @@
 """Deterministic tick engine, independent of task allocation strategies."""
 
 from copy import deepcopy
+from importlib.metadata import version
+import math
+from time import perf_counter
 
+from .allocation import Observation, allocate
 from .instances import from_dict
 from .models import Instance, Robot, RobotState, TaskState
 from .paths import shortest_path
 
 
 class Simulation:
-    def __init__(self, instance: Instance):
+    def __init__(self, instance: Instance, strategy: str = "manual", *, solver_budget: float = 1.0):
+        if strategy not in {"manual", "fifo", "cpsat"}:
+            raise ValueError(f"Unknown allocation strategy {strategy!r}")
+        if isinstance(solver_budget, bool) or not isinstance(solver_budget, (int, float)) or not math.isfinite(solver_budget) or solver_budget <= 0:
+            raise ValueError("solver_budget must be a finite positive number")
+        self.strategy = strategy
+        self.solver_budget = solver_budget
+        self.strategy_seconds = 0.0
+        self.invalid_decisions = 0
         # Start from validated configuration, never from another run's mutable state.
         initial = from_dict(instance.to_dict())
         self._configuration = initial.to_dict()
@@ -36,7 +48,30 @@ class Simulation:
     def _event(self, kind: str, **details) -> None:
         self.events.append({"tick": self.tick, "kind": kind, **details})
 
+    def observation(self) -> Observation:
+        """Detached current state; strategies cannot modify the live engine."""
+        return Observation(self.tick, self.grid,
+                           tuple(deepcopy(r) for r in sorted(self.robots.values(), key=lambda r: r.id)),
+                           tuple(deepcopy(t) for t in sorted(self.tasks.values(), key=lambda t: t.id)
+                                 if t.state == TaskState.PENDING))
 
+
+    def _allocate(self) -> None:
+        if self.strategy == "manual":
+            return
+        observation = self.observation()
+        if not observation.tasks or not any(r.available for r in observation.robots):
+            return
+        start = perf_counter()
+        decision = allocate(self.strategy, observation, self.solver_budget)
+        self.strategy_seconds += perf_counter() - start
+        self._event("allocation", strategy=self.strategy, **decision)
+        for robot_id, task_id in decision["assignments"]:
+            try:
+                self.assign(robot_id, task_id)
+            except ValueError as error:
+                self.invalid_decisions += 1
+                self._event("invalid_assignment", robot_id=robot_id, task_id=task_id, reason=str(error))
 
     def _start_leg(self, robot: Robot, path: list, *, pickup: bool) -> None:
         robot.path = path
@@ -114,6 +149,7 @@ class Simulation:
         """Advance one tick with one action per robot."""
         if self.finished:
             raise ValueError("Simulation horizon reached")
+        self._allocate()
         self.tick += 1
         releases = []
         for robot_id in sorted(self.robots):
@@ -180,6 +216,12 @@ class Simulation:
         recorded = {"instance": deepcopy(self._configuration),
                     "events": deepcopy(self.events), "snapshots": deepcopy(self.snapshots),
                     "current": self.snapshot()}
+        if self.strategy != "manual":
+            recorded["strategy"] = self.strategy
+        if self.strategy == "cpsat":
+            recorded["solver"] = {"budget_per_phase": self.solver_budget,
+                                  "unit": "deterministic_time", "workers": 1,
+                                  "seed": 0, "ortools_version": version("ortools")}
         return recorded
 
     def check_invariants(self) -> None:

@@ -1,0 +1,11 @@
+{
+  "width": 5, "height": 1, "horizon": 12,
+  "robots": [
+    {"id": "r1", "position": [0, 0], "capacity": 1},
+    {"id": "r2", "position": [4, 0], "capacity": 1}
+  ],
+  "tasks": [
+    {"id": "t1", "pickup": [4, 0], "destination": [4, 0]},
+    {"id": "t2", "pickup": [0, 0], "destination": [0, 0]}
+  ]
+}
