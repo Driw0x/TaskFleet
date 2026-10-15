@@ -1,0 +1,8 @@
+{
+  "width": 3, "height": 2, "horizon": 6,
+  "obstacles": [[0, 1], [2, 1]],
+  "agents": [
+    {"id": "a", "start": [1, 1], "goal": [1, 0]},
+    {"id": "b", "start": [0, 0], "goal": [2, 0]}
+  ]
+}

@@ -1,0 +1,4286 @@
+{
+  "tasks_total": 2,
+  "tasks_arrived": 2,
+  "tasks_completed": 0,
+  "completion_rate": 0.0,
+  "observed_ticks": 12,
+  "makespan": null,
+  "last_completion_tick": null,
+  "total_tardiness": 0,
+  "late_completed_tasks": 0,
+  "unfinished_tardiness_lower_bound": 0,
+  "task_tardiness": {},
+  "distance": 0,
+  "robot_utilization": {
+    "r1": 0.0,
+    "r2": 0.0
+  },
+  "mean_robot_utilization": 0.0,
+  "productive_robot_ticks": 0,
+  "waiting_robot_ticks": 0,
+  "unavailable_robot_ticks": 0,
+  "strategy_seconds": 0.0,
+  "messages": 0,
+  "message_types": {},
+  "invalid_decisions": 0,
+  "policy": "llm",
+  "seed": 0,
+  "return": -24,
+  "terminated": false,
+  "truncated": true,
+  "conflicts": 0,
+  "rejected_actions": 0,
+  "priority_wins": {
+    "r1": 0,
+    "r2": 0
+  },
+  "inference_seconds": 40.081667800000105,
+  "q_observations": 0,
+  "q_known_observations": 0,
+  "total_seconds": 40.08458780000001,
+  "llm": {
+    "calls": 4,
+    "successes": 0,
+    "rejections": 24,
+    "fallbacks": 24,
+    "latency_seconds": 40.08072009999978,
+    "prompt_tokens": 0,
+    "generated_tokens": 0,
+    "errors": {
+      "timeout": 4,
+      "budget_exhausted": 20
+    }
+  },
+  "llm_trace": [
+    {
+      "observation": {
+        "tick": 0,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r1",
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 6,
+          "t2": 2
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "timeout",
+      "latency_seconds": 10.024813699999868
+    },
+    {
+      "observation": {
+        "tick": 0,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r2",
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 2,
+          "t2": 6
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "timeout",
+      "latency_seconds": 10.021607799999856
+    },
+    {
+      "observation": {
+        "tick": 1,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r1",
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 6,
+          "t2": 2
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "timeout",
+      "latency_seconds": 10.010106300000189
+    },
+    {
+      "observation": {
+        "tick": 1,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r2",
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 2,
+          "t2": 6
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "timeout",
+      "latency_seconds": 10.024186500000269
+    },
+    {
+      "observation": {
+        "tick": 2,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r1",
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 6,
+          "t2": 2
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 1.0000003385357559e-06
+    },
+    {
+      "observation": {
+        "tick": 2,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r2",
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 2,
+          "t2": 6
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 3.000000106112566e-07
+    },
+    {
+      "observation": {
+        "tick": 3,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r1",
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 6,
+          "t2": 2
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 3.999998625658918e-07
+    },
+    {
+      "observation": {
+        "tick": 3,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r2",
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 2,
+          "t2": 6
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 2.0000015865662135e-07
+    },
+    {
+      "observation": {
+        "tick": 4,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r1",
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 6,
+          "t2": 2
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 2.999995558639057e-07
+    },
+    {
+      "observation": {
+        "tick": 4,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r2",
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 2,
+          "t2": 6
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 2.0000015865662135e-07
+    },
+    {
+      "observation": {
+        "tick": 5,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r1",
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 6,
+          "t2": 2
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 3.000000106112566e-07
+    },
+    {
+      "observation": {
+        "tick": 5,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r2",
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 2,
+          "t2": 6
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 1.9999970390927047e-07
+    },
+    {
+      "observation": {
+        "tick": 6,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r1",
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 6,
+          "t2": 2
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 2.0000015865662135e-07
+    },
+    {
+      "observation": {
+        "tick": 6,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r2",
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 2,
+          "t2": 6
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 9.999985195463523e-08
+    },
+    {
+      "observation": {
+        "tick": 7,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r1",
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 6,
+          "t2": 2
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 3.999998625658918e-07
+    },
+    {
+      "observation": {
+        "tick": 7,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r2",
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 2,
+          "t2": 6
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 2.0000015865662135e-07
+    },
+    {
+      "observation": {
+        "tick": 8,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r1",
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 6,
+          "t2": 2
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 3.000000106112566e-07
+    },
+    {
+      "observation": {
+        "tick": 8,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r2",
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 2,
+          "t2": 6
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 2.0000015865662135e-07
+    },
+    {
+      "observation": {
+        "tick": 9,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r1",
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 6,
+          "t2": 2
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 2.0000015865662135e-07
+    },
+    {
+      "observation": {
+        "tick": 9,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r2",
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 2,
+          "t2": 6
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 1.9999970390927047e-07
+    },
+    {
+      "observation": {
+        "tick": 10,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r1",
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 6,
+          "t2": 2
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 1.9999970390927047e-07
+    },
+    {
+      "observation": {
+        "tick": 10,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r2",
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 2,
+          "t2": 6
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 9.999985195463523e-08
+    },
+    {
+      "observation": {
+        "tick": 11,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r1",
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 6,
+          "t2": 2
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 4.000003173132427e-07
+    },
+    {
+      "observation": {
+        "tick": 11,
+        "grid": {
+          "width": 5,
+          "height": 1,
+          "obstacles": []
+        },
+        "robot": {
+          "id": "r2",
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "task_id": null,
+          "unavailable": false
+        },
+        "tasks": [
+          {
+            "id": "t1",
+            "pickup": [
+              4,
+              0
+            ],
+            "destination": [
+              4,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          },
+          {
+            "id": "t2",
+            "pickup": [
+              0,
+              0
+            ],
+            "destination": [
+              0,
+              0
+            ],
+            "load": 1,
+            "handling_ticks": 1,
+            "deadline": null,
+            "arrival_tick": 0
+          }
+        ],
+        "costs": {
+          "t1": 2,
+          "t2": 6
+        },
+        "legal_actions": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "allowed_actions": [
+        null,
+        "t1",
+        "t2"
+      ],
+      "action": null,
+      "fallback": true,
+      "error": "budget_exhausted",
+      "latency_seconds": 3.999998625658918e-07
+    }
+  ],
+  "trace": {
+    "instance": {
+      "width": 5,
+      "height": 1,
+      "obstacles": [],
+      "robots": [
+        {
+          "id": "r1",
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1
+        },
+        {
+          "id": "r2",
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1
+        }
+      ],
+      "tasks": [
+        {
+          "id": "t1",
+          "pickup": [
+            4,
+            0
+          ],
+          "destination": [
+            4,
+            0
+          ],
+          "load": 1,
+          "handling_ticks": 1,
+          "deadline": null,
+          "arrival_tick": 0
+        },
+        {
+          "id": "t2",
+          "pickup": [
+            0,
+            0
+          ],
+          "destination": [
+            0,
+            0
+          ],
+          "load": 1,
+          "handling_ticks": 1,
+          "deadline": null,
+          "arrival_tick": 0
+        }
+      ],
+      "resources": [],
+      "horizon": 12,
+      "seed": null,
+      "unavailability": []
+    },
+    "events": [],
+    "snapshots": [
+      {
+        "tick": 0,
+        "finished": false,
+        "all_tasks_completed": false,
+        "robots": {
+          "r1": {
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          },
+          "r2": {
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          }
+        },
+        "tasks": {
+          "t1": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          },
+          "t2": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          }
+        },
+        "resources": {}
+      },
+      {
+        "tick": 1,
+        "finished": false,
+        "all_tasks_completed": false,
+        "robots": {
+          "r1": {
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          },
+          "r2": {
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          }
+        },
+        "tasks": {
+          "t1": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          },
+          "t2": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          }
+        },
+        "resources": {}
+      },
+      {
+        "tick": 2,
+        "finished": false,
+        "all_tasks_completed": false,
+        "robots": {
+          "r1": {
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          },
+          "r2": {
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          }
+        },
+        "tasks": {
+          "t1": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          },
+          "t2": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          }
+        },
+        "resources": {}
+      },
+      {
+        "tick": 3,
+        "finished": false,
+        "all_tasks_completed": false,
+        "robots": {
+          "r1": {
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          },
+          "r2": {
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          }
+        },
+        "tasks": {
+          "t1": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          },
+          "t2": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          }
+        },
+        "resources": {}
+      },
+      {
+        "tick": 4,
+        "finished": false,
+        "all_tasks_completed": false,
+        "robots": {
+          "r1": {
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          },
+          "r2": {
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          }
+        },
+        "tasks": {
+          "t1": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          },
+          "t2": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          }
+        },
+        "resources": {}
+      },
+      {
+        "tick": 5,
+        "finished": false,
+        "all_tasks_completed": false,
+        "robots": {
+          "r1": {
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          },
+          "r2": {
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          }
+        },
+        "tasks": {
+          "t1": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          },
+          "t2": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          }
+        },
+        "resources": {}
+      },
+      {
+        "tick": 6,
+        "finished": false,
+        "all_tasks_completed": false,
+        "robots": {
+          "r1": {
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          },
+          "r2": {
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          }
+        },
+        "tasks": {
+          "t1": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          },
+          "t2": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          }
+        },
+        "resources": {}
+      },
+      {
+        "tick": 7,
+        "finished": false,
+        "all_tasks_completed": false,
+        "robots": {
+          "r1": {
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          },
+          "r2": {
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          }
+        },
+        "tasks": {
+          "t1": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          },
+          "t2": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          }
+        },
+        "resources": {}
+      },
+      {
+        "tick": 8,
+        "finished": false,
+        "all_tasks_completed": false,
+        "robots": {
+          "r1": {
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          },
+          "r2": {
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          }
+        },
+        "tasks": {
+          "t1": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          },
+          "t2": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          }
+        },
+        "resources": {}
+      },
+      {
+        "tick": 9,
+        "finished": false,
+        "all_tasks_completed": false,
+        "robots": {
+          "r1": {
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          },
+          "r2": {
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          }
+        },
+        "tasks": {
+          "t1": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          },
+          "t2": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          }
+        },
+        "resources": {}
+      },
+      {
+        "tick": 10,
+        "finished": false,
+        "all_tasks_completed": false,
+        "robots": {
+          "r1": {
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          },
+          "r2": {
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          }
+        },
+        "tasks": {
+          "t1": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          },
+          "t2": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          }
+        },
+        "resources": {}
+      },
+      {
+        "tick": 11,
+        "finished": false,
+        "all_tasks_completed": false,
+        "robots": {
+          "r1": {
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          },
+          "r2": {
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          }
+        },
+        "tasks": {
+          "t1": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          },
+          "t2": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          }
+        },
+        "resources": {}
+      },
+      {
+        "tick": 12,
+        "finished": true,
+        "all_tasks_completed": false,
+        "robots": {
+          "r1": {
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          },
+          "r2": {
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "available": true,
+            "unavailable": false,
+            "task_id": null,
+            "handling_remaining": 0,
+            "resource_id": null,
+            "path": []
+          }
+        },
+        "tasks": {
+          "t1": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          },
+          "t2": {
+            "state": "pending",
+            "robot_id": null,
+            "arrival_tick": 0,
+            "completed_tick": null,
+            "late": false
+          }
+        },
+        "resources": {}
+      }
+    ],
+    "current": {
+      "tick": 12,
+      "finished": true,
+      "all_tasks_completed": false,
+      "robots": {
+        "r1": {
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "available": true,
+          "unavailable": false,
+          "task_id": null,
+          "handling_remaining": 0,
+          "resource_id": null,
+          "path": []
+        },
+        "r2": {
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "available": true,
+          "unavailable": false,
+          "task_id": null,
+          "handling_remaining": 0,
+          "resource_id": null,
+          "path": []
+        }
+      },
+      "tasks": {
+        "t1": {
+          "state": "pending",
+          "robot_id": null,
+          "arrival_tick": 0,
+          "completed_tick": null,
+          "late": false
+        },
+        "t2": {
+          "state": "pending",
+          "robot_id": null,
+          "arrival_tick": 0,
+          "completed_tick": null,
+          "late": false
+        }
+      },
+      "resources": {}
+    }
+  },
+  "decisions": [
+    {
+      "tick": 0,
+      "observations": {
+        "r1": {
+          "tick": 0,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r1",
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 6,
+            "t2": 2
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        },
+        "r2": {
+          "tick": 0,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r2",
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 2,
+            "t2": 6
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        }
+      },
+      "proposals": {
+        "r1": null,
+        "r2": null
+      },
+      "accepted": [],
+      "rejected": [],
+      "conflicts": []
+    },
+    {
+      "tick": 1,
+      "observations": {
+        "r1": {
+          "tick": 1,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r1",
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 6,
+            "t2": 2
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        },
+        "r2": {
+          "tick": 1,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r2",
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 2,
+            "t2": 6
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        }
+      },
+      "proposals": {
+        "r1": null,
+        "r2": null
+      },
+      "accepted": [],
+      "rejected": [],
+      "conflicts": []
+    },
+    {
+      "tick": 2,
+      "observations": {
+        "r1": {
+          "tick": 2,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r1",
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 6,
+            "t2": 2
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        },
+        "r2": {
+          "tick": 2,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r2",
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 2,
+            "t2": 6
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        }
+      },
+      "proposals": {
+        "r1": null,
+        "r2": null
+      },
+      "accepted": [],
+      "rejected": [],
+      "conflicts": []
+    },
+    {
+      "tick": 3,
+      "observations": {
+        "r1": {
+          "tick": 3,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r1",
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 6,
+            "t2": 2
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        },
+        "r2": {
+          "tick": 3,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r2",
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 2,
+            "t2": 6
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        }
+      },
+      "proposals": {
+        "r1": null,
+        "r2": null
+      },
+      "accepted": [],
+      "rejected": [],
+      "conflicts": []
+    },
+    {
+      "tick": 4,
+      "observations": {
+        "r1": {
+          "tick": 4,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r1",
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 6,
+            "t2": 2
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        },
+        "r2": {
+          "tick": 4,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r2",
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 2,
+            "t2": 6
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        }
+      },
+      "proposals": {
+        "r1": null,
+        "r2": null
+      },
+      "accepted": [],
+      "rejected": [],
+      "conflicts": []
+    },
+    {
+      "tick": 5,
+      "observations": {
+        "r1": {
+          "tick": 5,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r1",
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 6,
+            "t2": 2
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        },
+        "r2": {
+          "tick": 5,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r2",
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 2,
+            "t2": 6
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        }
+      },
+      "proposals": {
+        "r1": null,
+        "r2": null
+      },
+      "accepted": [],
+      "rejected": [],
+      "conflicts": []
+    },
+    {
+      "tick": 6,
+      "observations": {
+        "r1": {
+          "tick": 6,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r1",
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 6,
+            "t2": 2
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        },
+        "r2": {
+          "tick": 6,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r2",
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 2,
+            "t2": 6
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        }
+      },
+      "proposals": {
+        "r1": null,
+        "r2": null
+      },
+      "accepted": [],
+      "rejected": [],
+      "conflicts": []
+    },
+    {
+      "tick": 7,
+      "observations": {
+        "r1": {
+          "tick": 7,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r1",
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 6,
+            "t2": 2
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        },
+        "r2": {
+          "tick": 7,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r2",
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 2,
+            "t2": 6
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        }
+      },
+      "proposals": {
+        "r1": null,
+        "r2": null
+      },
+      "accepted": [],
+      "rejected": [],
+      "conflicts": []
+    },
+    {
+      "tick": 8,
+      "observations": {
+        "r1": {
+          "tick": 8,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r1",
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 6,
+            "t2": 2
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        },
+        "r2": {
+          "tick": 8,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r2",
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 2,
+            "t2": 6
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        }
+      },
+      "proposals": {
+        "r1": null,
+        "r2": null
+      },
+      "accepted": [],
+      "rejected": [],
+      "conflicts": []
+    },
+    {
+      "tick": 9,
+      "observations": {
+        "r1": {
+          "tick": 9,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r1",
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 6,
+            "t2": 2
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        },
+        "r2": {
+          "tick": 9,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r2",
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 2,
+            "t2": 6
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        }
+      },
+      "proposals": {
+        "r1": null,
+        "r2": null
+      },
+      "accepted": [],
+      "rejected": [],
+      "conflicts": []
+    },
+    {
+      "tick": 10,
+      "observations": {
+        "r1": {
+          "tick": 10,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r1",
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 6,
+            "t2": 2
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        },
+        "r2": {
+          "tick": 10,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r2",
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 2,
+            "t2": 6
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        }
+      },
+      "proposals": {
+        "r1": null,
+        "r2": null
+      },
+      "accepted": [],
+      "rejected": [],
+      "conflicts": []
+    },
+    {
+      "tick": 11,
+      "observations": {
+        "r1": {
+          "tick": 11,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r1",
+            "position": [
+              0,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 6,
+            "t2": 2
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        },
+        "r2": {
+          "tick": 11,
+          "grid": {
+            "width": 5,
+            "height": 1,
+            "obstacles": []
+          },
+          "robot": {
+            "id": "r2",
+            "position": [
+              4,
+              0
+            ],
+            "capacity": 1,
+            "state": "idle",
+            "task_id": null,
+            "unavailable": false
+          },
+          "tasks": [
+            {
+              "id": "t1",
+              "pickup": [
+                4,
+                0
+              ],
+              "destination": [
+                4,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            },
+            {
+              "id": "t2",
+              "pickup": [
+                0,
+                0
+              ],
+              "destination": [
+                0,
+                0
+              ],
+              "load": 1,
+              "handling_ticks": 1,
+              "deadline": null,
+              "arrival_tick": 0
+            }
+          ],
+          "costs": {
+            "t1": 2,
+            "t2": 6
+          },
+          "legal_actions": [
+            null,
+            "t1",
+            "t2"
+          ]
+        }
+      },
+      "proposals": {
+        "r1": null,
+        "r2": null
+      },
+      "accepted": [],
+      "rejected": [],
+      "conflicts": []
+    }
+  ],
+  "rewards": [
+    -2,
+    -2,
+    -2,
+    -2,
+    -2,
+    -2,
+    -2,
+    -2,
+    -2,
+    -2,
+    -2,
+    -2
+  ],
+  "ollama_config": {
+    "url": "http://127.0.0.1:11434",
+    "model": "qwen2.5-coder:7b",
+    "timeout": 10.0,
+    "temperature": 0.0,
+    "max_tokens": 32,
+    "call_budget": 4
+  },
+  "comparison": [
+    {
+      "tasks_total": 2,
+      "tasks_arrived": 2,
+      "tasks_completed": 2,
+      "completion_rate": 1.0,
+      "observed_ticks": 2,
+      "makespan": 2,
+      "last_completion_tick": 2,
+      "total_tardiness": 0,
+      "late_completed_tasks": 0,
+      "unfinished_tardiness_lower_bound": 0,
+      "task_tardiness": {},
+      "distance": 0,
+      "robot_utilization": {
+        "r1": 1.0,
+        "r2": 1.0
+      },
+      "mean_robot_utilization": 1.0,
+      "productive_robot_ticks": 4,
+      "waiting_robot_ticks": 0,
+      "unavailable_robot_ticks": 0,
+      "strategy_seconds": 0.0,
+      "messages": 0,
+      "message_types": {},
+      "invalid_decisions": 0,
+      "policy": "heuristic",
+      "seed": 0,
+      "return": -2,
+      "terminated": true,
+      "truncated": false,
+      "conflicts": 0,
+      "rejected_actions": 0,
+      "priority_wins": {
+        "r1": 1,
+        "r2": 1
+      },
+      "inference_seconds": 7.399999503832078e-06,
+      "q_observations": 0,
+      "q_known_observations": 0,
+      "total_seconds": 0.0033261000003221852
+    },
+    {
+      "tasks_total": 2,
+      "tasks_arrived": 2,
+      "tasks_completed": 2,
+      "completion_rate": 1.0,
+      "observed_ticks": 8,
+      "makespan": 8,
+      "last_completion_tick": 8,
+      "total_tardiness": 0,
+      "late_completed_tasks": 0,
+      "unfinished_tardiness_lower_bound": 0,
+      "task_tardiness": {},
+      "distance": 8,
+      "robot_utilization": {
+        "r1": 0.75,
+        "r2": 0.75
+      },
+      "mean_robot_utilization": 0.75,
+      "productive_robot_ticks": 12,
+      "waiting_robot_ticks": 0,
+      "unavailable_robot_ticks": 0,
+      "strategy_seconds": 0.0,
+      "messages": 0,
+      "message_types": {},
+      "invalid_decisions": 0,
+      "policy": "q",
+      "seed": 0,
+      "return": -12,
+      "terminated": true,
+      "truncated": false,
+      "conflicts": 1,
+      "rejected_actions": 0,
+      "priority_wins": {
+        "r1": 1,
+        "r2": 1
+      },
+      "inference_seconds": 0.00021830000059708254,
+      "q_observations": 4,
+      "q_known_observations": 0,
+      "total_seconds": 0.0014300000002549496
+    },
+    {
+      "tasks_total": 2,
+      "tasks_arrived": 2,
+      "tasks_completed": 2,
+      "completion_rate": 1.0,
+      "observed_ticks": 8,
+      "makespan": 8,
+      "last_completion_tick": 8,
+      "total_tardiness": 0,
+      "late_completed_tasks": 0,
+      "unfinished_tardiness_lower_bound": 0,
+      "task_tardiness": {},
+      "distance": 8,
+      "robot_utilization": {
+        "r1": 0.75,
+        "r2": 0.75
+      },
+      "mean_robot_utilization": 0.75,
+      "productive_robot_ticks": 12,
+      "waiting_robot_ticks": 0,
+      "unavailable_robot_ticks": 0,
+      "strategy_seconds": 0.0,
+      "messages": 0,
+      "message_types": {},
+      "invalid_decisions": 0,
+      "policy": "random",
+      "seed": 0,
+      "return": -12,
+      "terminated": true,
+      "truncated": false,
+      "conflicts": 1,
+      "rejected_actions": 0,
+      "priority_wins": {
+        "r1": 1,
+        "r2": 1
+      },
+      "inference_seconds": 1.0600000223348616e-05,
+      "q_observations": 0,
+      "q_known_observations": 0,
+      "total_seconds": 0.001267300000108662
+    }
+  ],
+  "comparison_scope": "same examples/allocation.json, seed0, V1 physics, checkpoint trained on disjoint generated train split; all stop completion/horizon"
+}

@@ -37,6 +37,7 @@ let fetchMock: ReturnType<typeof vi.fn>
 let respond: (path: string, body?: Record<string, unknown>) => unknown
 
 beforeEach(() => {
+  window.history.replaceState(null, '', '/')
   wrappers = []
   respond = (path, body) => {
     if (path === '/api/examples') return ['complex_comparison.json', 'simple.json']

@@ -1,0 +1,5 @@
+[
+  [],
+  [{"robot_id": "a", "start_tick": 2, "end_tick": 5}],
+  [{"robot_id": "b", "start_tick": 1, "end_tick": 4}]
+]

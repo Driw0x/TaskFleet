@@ -109,3 +109,32 @@ footer { color: #8193a5; font-size: 11px; padding: 0 0 24px; text-align: center;
 @media (max-width: 760px) { .workspace { grid-template-columns: 1fr; } .brand { width: 100%; } .panel { padding: 14px; } .status-line .hint { margin-left: 0; } .topbar label:first-of-type { flex: 1; } .warehouse { min-height: 220px; } .filters label { flex: 1; } }
 @media (prefers-reduced-motion: reduce) { .robot { transition: none !important; } }
 @media (max-width: 760px) { .warehouse { min-width: 650px; } .workspace { grid-template-columns: minmax(0, 1fr); } .mobile-grid-hint { display: block; } }
+.app-navigation { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 28px; background: white; border-bottom: 1px solid #d5dfe9; }
+.app-navigation .active { background: #dceef1; color: #126e7d; border-color: #86b8ca; }
+.experiments { padding-top: 20px; }
+.experiments .panel-heading { flex-wrap: wrap; }
+.experiments .panel-heading h2 { min-width: 0; overflow-wrap: anywhere; }
+.experiments .experiment-playback { position: sticky; top: 0; z-index: 5; background: white; padding: 10px 0; margin: 12px 0 18px; border-bottom: 1px solid #e3eaf1; }
+.experiments .experiment-playback .timeline { margin-top: 8px; font-size: 13px; }
+.experiments .experiment-playback .timeline input { margin-top: 8px; }
+.experiments .spatial-replay, .experiments .secondary-metrics { padding-top: 14px; border-top: 1px solid #e3eaf1; }
+.experiments .hint { font-size: 13px; }
+.experiments .metrics { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.experiments .metrics > div { padding: 12px; }
+.experiment-fields { border: 0; padding: 0; margin: 0; min-width: 0; }
+.experiment-parameters, .experiment-actions, .ollama-controls { margin-top: 18px; }
+.experiment-fields label { max-width: 420px; }
+.experiment-fields input, .experiment-fields select { max-width: 100%; min-width: 0; }
+.experiment-fields select[multiple] { min-height: 95px; }
+.checkbox-label { flex-direction: row; align-items: center; }
+.ollama-controls { padding: 16px; background: #f5f8fb; border-radius: 8px; }
+.experiments details { margin-top: 16px; }
+.experiments .reward-table { max-height: 230px; }
+.current-row { background: #e9f3ff; }
+.mapf { max-height: 500px; }
+@media (max-width: 600px) {
+  .experiments .fields label { flex-basis: 100%; }
+  .experiments .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .experiments .metrics > div { overflow-wrap: anywhere; }
+  .experiments .metrics strong { font-size: 20px; }
+}

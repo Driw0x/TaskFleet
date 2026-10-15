@@ -1,0 +1,7 @@
+{
+  "width": 3, "height": 3, "horizon": 6,
+  "agents": [
+    {"id": "a", "start": [0, 1], "goal": [2, 1]},
+    {"id": "b", "start": [1, 0], "goal": [1, 2]}
+  ]
+}

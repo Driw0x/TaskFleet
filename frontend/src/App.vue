@@ -4,8 +4,23 @@ import { download, request } from './api'
 import Warehouse from './components/Warehouse.vue'
 import InstanceEditor from './components/InstanceEditor.vue'
 import EventLog from './components/EventLog.vue'
+import Experiments from './components/Experiments.vue'
 import { robotLabels, taskLabels } from './types'
 import type { Comparison, Instance, Preview, Result, Strategy, TraceEvent } from './types'
+import type { Milestone } from './experiments'
+
+const problemSlugs: Record<Milestone, string> = {
+  m7: 'ordonnancement', m8: 'allocation-distribuee',
+  m9: 'planification-multi-agent', m10: 'apprentissage-cooperatif',
+}
+function readLocation() {
+  const parameters = new URL(window.location.href).searchParams
+  return {
+    space: parameters.get('view') === 'experiences' ? 'v2' : 'v1',
+    problem: (Object.keys(problemSlugs) as Milestone[]).find(id => problemSlugs[id] === parameters.get('problem')) ?? 'm7',
+  }
+}
+const initialLocation = readLocation()
 
 const examples = ref<string[]>([])
 const example = ref('complex_comparison.json')
@@ -28,6 +43,33 @@ const selectedResource = ref<string | null>(null)
 const playing = ref(false)
 const speed = ref(1)
 const tab = ref('events')
+const space = ref(initialLocation.space)
+const scientificProblem = ref<Milestone>(initialLocation.problem)
+const experimentsOpened = ref(space.value === 'v2')
+let restoringLocation = false
+function writeLocation(replace = false) {
+  const url = new URL(window.location.href)
+  url.searchParams.set('view', space.value === 'v2' ? 'experiences' : 'simulation')
+  if (space.value === 'v2') url.searchParams.set('problem', problemSlugs[scientificProblem.value])
+  else url.searchParams.delete('problem')
+  if (url.href !== window.location.href) window.history[replace ? 'replaceState' : 'pushState'](null, '', url)
+}
+function restoreLocation() {
+  const route = readLocation()
+  restoringLocation = true
+  pause(); space.value = route.space; scientificProblem.value = route.problem
+  if (space.value === 'v2') experimentsOpened.value = true
+  restoringLocation = false
+  writeLocation(true)
+}
+watch([space, scientificProblem], () => {
+  if (!restoringLocation) writeLocation()
+}, { flush: 'sync' })
+function navigate(value: string) {
+  pause()
+  space.value = value
+  if (value === 'v2') experimentsOpened.value = true
+}
 let revision = 0
 let operation = 0
 let validationTimer: ReturnType<typeof setTimeout> | undefined
@@ -217,16 +259,19 @@ function editDraft(content: string) {
   validationError.value = 'JSON modifié : appliquer pour valider.'
 }
 onMounted(async () => {
+  writeLocation(true)
+  window.addEventListener('popstate', restoreLocation)
   try {
     examples.value = await request<string[]>('examples')
     if (!disposed) await load()
   } catch (caught) { if (!disposed) error.value = message(caught) }
 })
-onUnmounted(() => { disposed = true; revision++; operation++; pause(); clearTimeout(validationTimer) })
+onUnmounted(() => { disposed = true; revision++; operation++; pause(); clearTimeout(validationTimer); window.removeEventListener('popstate', restoreLocation) })
 </script>
 
 <template>
-  <header class="topbar">
+  <nav class="app-navigation" aria-label="Espaces TaskFleet"><button :aria-pressed="space === 'v1'" :class="{ active: space === 'v1' }" data-testid="nav-v1" @click="navigate('v1')">Simulation d’entrepôt</button><button :aria-pressed="space === 'v2'" :class="{ active: space === 'v2' }" data-testid="nav-v2" @click="navigate('v2')">Expériences scientifiques</button></nav>
+  <header v-show="space === 'v1'" class="topbar">
     <div class="brand"><span class="brand-icon">TF</span><div><h1>TaskFleet</h1><p>Entrepôt multi-agent</p></div></div>
     <label>Instance<select v-model="example" data-testid="example"><option v-for="name in examples" :key="name">{{ name }}</option></select></label>
     <button data-testid="load-example" @click="load">Charger</button>
@@ -235,7 +280,7 @@ onUnmounted(() => { disposed = true; revision++; operation++; pause(); clearTime
     <button class="primary" data-testid="run" :disabled="!valid || !!busy" @click="calculate(false)">{{ busy === 'simulation' ? 'Calcul…' : 'Lancer' }}</button>
     <button data-testid="compare" :disabled="!valid || !!busy" @click="calculate(true)">{{ busy === 'comparaison' ? 'Comparaison…' : 'Comparer' }}</button>
   </header>
-  <main>
+  <main v-show="space === 'v1'">
     <div class="status-line" aria-live="polite"><span :class="valid ? 'green' : 'orange'">{{ valid ? 'Instance valide' : validationError || 'Charger une instance' }}</span><span v-if="busy" role="status">{{ busy }} en cours…</span><span class="hint">Budget en unités déterministes par phase</span></div>
     <p v-if="error" class="error" role="alert">{{ error }}</p>
     <p v-if="notice" class="notice" role="status">{{ notice }}</p>
@@ -312,4 +357,5 @@ onUnmounted(() => { disposed = true; revision++; operation++; pause(); clearTime
     <InstanceEditor v-if="instance" :instance="instance" :busy="!!busy" :valid="valid" :json-draft="jsonDraft" @change="instance = $event" @generate="generate" @import="importJson" @draft="editDraft" @export="valid && preview && download('taskfleet-instance.json', preview.instance)" />
     <footer>Simulation déterministe · Décisions au tick n, actions au tick n+1 · Moteur scientifique Python commun</footer>
   </main>
+  <Experiments v-if="experimentsOpened" v-show="space === 'v2'" v-model:milestone="scientificProblem" :active="space === 'v2'" :user-instance="valid ? preview?.instance : null" />
 </template>

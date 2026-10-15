@@ -1,0 +1,74 @@
+{
+  "width": 4,
+  "height": 3,
+  "obstacles": [],
+  "robots": [
+    {
+      "id": "r001",
+      "position": [
+        0,
+        1
+      ],
+      "capacity": 1
+    },
+    {
+      "id": "r002",
+      "position": [
+        2,
+        1
+      ],
+      "capacity": 3
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t001",
+      "pickup": [
+        0,
+        0
+      ],
+      "destination": [
+        3,
+        1
+      ],
+      "load": 1,
+      "handling_ticks": 1,
+      "deadline": 10,
+      "arrival_tick": 0
+    },
+    {
+      "id": "t002",
+      "pickup": [
+        3,
+        2
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "load": 1,
+      "handling_ticks": 1,
+      "deadline": 15,
+      "arrival_tick": 0
+    },
+    {
+      "id": "t003",
+      "pickup": [
+        2,
+        2
+      ],
+      "destination": [
+        1,
+        0
+      ],
+      "load": 3,
+      "handling_ticks": 1,
+      "deadline": 20,
+      "arrival_tick": 0
+    }
+  ],
+  "resources": [],
+  "horizon": 40,
+  "seed": 203,
+  "unavailability": []
+}

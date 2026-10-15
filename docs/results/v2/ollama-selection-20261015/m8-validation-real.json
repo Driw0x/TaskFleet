@@ -1,0 +1,1267 @@
+{
+  "tick": 0,
+  "reference_proven": true,
+  "methods": {
+    "fifo": {
+      "assignments": [
+        [
+          "r1",
+          "t1"
+        ],
+        [
+          "r2",
+          "t2"
+        ]
+      ],
+      "estimated_cost": 12,
+      "status": "HEURISTIC",
+      "optimal": false,
+      "total_seconds": 2.6400000024295878e-05,
+      "quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 12,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "logical_messages": 0,
+      "transmissions": 0,
+      "cardinality_gap": 0,
+      "cost_gap_at_optimal_cardinality": 8
+    },
+    "cpsat": {
+      "assignments": [
+        [
+          "r2",
+          "t1"
+        ],
+        [
+          "r1",
+          "t2"
+        ]
+      ],
+      "estimated_cost": 4,
+      "status": "OPTIMAL",
+      "optimal": true,
+      "phases": [
+        "OPTIMAL",
+        "OPTIMAL"
+      ],
+      "total_seconds": 0.7297750999996424,
+      "quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 4,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "logical_messages": 0,
+      "transmissions": 0,
+      "cardinality_gap": 0,
+      "cost_gap_at_optimal_cardinality": 0
+    },
+    "cnp": {
+      "assignments": [
+        [
+          "r2",
+          "t1"
+        ],
+        [
+          "r1",
+          "t2"
+        ]
+      ],
+      "estimated_cost": 4,
+      "status": "NEGOTIATED",
+      "optimal": false,
+      "messages": [
+        {
+          "type": "announce",
+          "sender": "r1",
+          "recipient": "all",
+          "task_id": "t1"
+        },
+        {
+          "type": "request",
+          "sender": "r1",
+          "recipient": "r1",
+          "task_id": "t1"
+        },
+        {
+          "type": "offer",
+          "sender": "r1",
+          "recipient": "r1",
+          "task_id": "t1",
+          "cost": 6
+        },
+        {
+          "type": "request",
+          "sender": "r1",
+          "recipient": "r2",
+          "task_id": "t1"
+        },
+        {
+          "type": "offer",
+          "sender": "r2",
+          "recipient": "r1",
+          "task_id": "t1",
+          "cost": 2
+        },
+        {
+          "type": "award",
+          "sender": "r1",
+          "recipient": "r2",
+          "task_id": "t1",
+          "cost": 2
+        },
+        {
+          "type": "accept",
+          "sender": "r2",
+          "recipient": "r1",
+          "task_id": "t1",
+          "reason": "committed"
+        },
+        {
+          "type": "reject",
+          "sender": "r1",
+          "recipient": "r1",
+          "task_id": "t1",
+          "reason": "other_offer_selected"
+        },
+        {
+          "type": "announce",
+          "sender": "r1",
+          "recipient": "all",
+          "task_id": "t2"
+        },
+        {
+          "type": "request",
+          "sender": "r1",
+          "recipient": "r1",
+          "task_id": "t2"
+        },
+        {
+          "type": "offer",
+          "sender": "r1",
+          "recipient": "r1",
+          "task_id": "t2",
+          "cost": 2
+        },
+        {
+          "type": "request",
+          "sender": "r1",
+          "recipient": "r2",
+          "task_id": "t2"
+        },
+        {
+          "type": "refuse",
+          "sender": "r2",
+          "recipient": "r1",
+          "task_id": "t2",
+          "reason": "busy_or_unavailable"
+        },
+        {
+          "type": "award",
+          "sender": "r1",
+          "recipient": "r1",
+          "task_id": "t2",
+          "cost": 2
+        },
+        {
+          "type": "accept",
+          "sender": "r1",
+          "recipient": "r1",
+          "task_id": "t2",
+          "reason": "committed"
+        }
+      ],
+      "total_seconds": 4.6299999667098746e-05,
+      "quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 4,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "logical_messages": 15,
+      "transmissions": 8,
+      "cardinality_gap": 0,
+      "cost_gap_at_optimal_cardinality": 0
+    },
+    "dsa": {
+      "method": "dsa",
+      "assignments": [
+        [
+          "r1",
+          "t2"
+        ],
+        [
+          "r2",
+          "t1"
+        ]
+      ],
+      "estimated_cost": 4,
+      "optimal": false,
+      "status": "CONFIRMED",
+      "stop_reason": "LOCAL_OPTIMUM",
+      "seed": 11,
+      "probability": 0.7,
+      "round_budget": 2,
+      "rounds": 1,
+      "message_budget": 100000,
+      "messages": [
+        {
+          "type": "domain",
+          "round": 0,
+          "sender": "r1",
+          "recipient": "all",
+          "tasks": [
+            "t1",
+            "t2"
+          ]
+        },
+        {
+          "type": "domain",
+          "round": 0,
+          "sender": "r2",
+          "recipient": "all",
+          "tasks": [
+            "t1",
+            "t2"
+          ]
+        },
+        {
+          "type": "value",
+          "round": 1,
+          "sender": "r1",
+          "recipient": "r2",
+          "action": "t2"
+        },
+        {
+          "type": "value",
+          "round": 1,
+          "sender": "r2",
+          "recipient": "r1",
+          "action": "t1"
+        },
+        {
+          "type": "claim",
+          "round": 2,
+          "sender": "r1",
+          "recipient": "r2",
+          "action": "t2"
+        },
+        {
+          "type": "claim",
+          "round": 2,
+          "sender": "r2",
+          "recipient": "r1",
+          "action": "t1"
+        },
+        {
+          "type": "confirmed",
+          "round": 2,
+          "sender": "r1",
+          "recipient": "r2",
+          "action": "t2"
+        },
+        {
+          "type": "confirmed",
+          "round": 2,
+          "sender": "r2",
+          "recipient": "r1",
+          "action": "t1"
+        }
+      ],
+      "logical_messages": 8,
+      "transmissions": 8,
+      "initialization_transmissions": 2,
+      "optimization_transmissions": 2,
+      "confirmation_transmissions": 4,
+      "minimum_confirmation_budget": 6,
+      "confirmation_abandonments": 0,
+      "raw_assignments": [
+        [
+          "r1",
+          "t2"
+        ],
+        [
+          "r2",
+          "t1"
+        ]
+      ],
+      "raw_quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 4,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "final_quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 4,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "history": [
+        {
+          "round": 1,
+          "values": {
+            "r1": "t2",
+            "r2": "t1"
+          },
+          "changed": 0,
+          "strict_improvements": 0
+        }
+      ],
+      "oscillations": 0,
+      "domains": {
+        "r1": [
+          null,
+          "t1",
+          "t2"
+        ],
+        "r2": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "neighbors": {
+        "r1": [
+          "r2"
+        ],
+        "r2": [
+          "r1"
+        ]
+      },
+      "penalties": {
+        "public_cost_bound": 10,
+        "idle": 21,
+        "conflict_pair": 63
+      },
+      "total_seconds": 0.00015609999991283985,
+      "quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 4,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "cardinality_gap": 0,
+      "cost_gap_at_optimal_cardinality": 0
+    },
+    "exhaustive": {
+      "assignments": [
+        [
+          "r1",
+          "t2"
+        ],
+        [
+          "r2",
+          "t1"
+        ]
+      ],
+      "estimated_cost": 4,
+      "optimal": true,
+      "status": "OPTIMAL",
+      "states": 9,
+      "states_checked": 9,
+      "total_seconds": 7.089999962772708e-05,
+      "quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 4,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "logical_messages": 0,
+      "transmissions": 0,
+      "cardinality_gap": 0,
+      "cost_gap_at_optimal_cardinality": 0
+    },
+    "llm": {
+      "method": "llm",
+      "assignments": [
+        [
+          "r1",
+          "t2"
+        ],
+        [
+          "r2",
+          "t1"
+        ]
+      ],
+      "estimated_cost": 4,
+      "optimal": false,
+      "status": "CONFIRMED",
+      "stop_reason": "ROUND_BUDGET",
+      "seed": 11,
+      "probability": 0.7,
+      "round_budget": 2,
+      "rounds": 2,
+      "message_budget": 100000,
+      "messages": [
+        {
+          "type": "domain",
+          "round": 0,
+          "sender": "r1",
+          "recipient": "all",
+          "tasks": [
+            "t1",
+            "t2"
+          ]
+        },
+        {
+          "type": "domain",
+          "round": 0,
+          "sender": "r2",
+          "recipient": "all",
+          "tasks": [
+            "t1",
+            "t2"
+          ]
+        },
+        {
+          "type": "value",
+          "round": 1,
+          "sender": "r1",
+          "recipient": "r2",
+          "action": "t2"
+        },
+        {
+          "type": "value",
+          "round": 1,
+          "sender": "r2",
+          "recipient": "r1",
+          "action": "t1"
+        },
+        {
+          "type": "value",
+          "round": 2,
+          "sender": "r1",
+          "recipient": "r2",
+          "action": null
+        },
+        {
+          "type": "value",
+          "round": 2,
+          "sender": "r2",
+          "recipient": "r1",
+          "action": null
+        },
+        {
+          "type": "claim",
+          "round": 3,
+          "sender": "r1",
+          "recipient": "r2",
+          "action": "t2"
+        },
+        {
+          "type": "claim",
+          "round": 3,
+          "sender": "r2",
+          "recipient": "r1",
+          "action": "t1"
+        },
+        {
+          "type": "confirmed",
+          "round": 3,
+          "sender": "r1",
+          "recipient": "r2",
+          "action": "t2"
+        },
+        {
+          "type": "confirmed",
+          "round": 3,
+          "sender": "r2",
+          "recipient": "r1",
+          "action": "t1"
+        }
+      ],
+      "logical_messages": 10,
+      "transmissions": 10,
+      "initialization_transmissions": 2,
+      "optimization_transmissions": 4,
+      "confirmation_transmissions": 4,
+      "minimum_confirmation_budget": 6,
+      "confirmation_abandonments": 0,
+      "raw_assignments": [
+        [
+          "r1",
+          "t2"
+        ],
+        [
+          "r2",
+          "t1"
+        ]
+      ],
+      "raw_quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 4,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "final_quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 4,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "history": [
+        {
+          "round": 1,
+          "values": {
+            "r1": null,
+            "r2": null
+          },
+          "changed": 2,
+          "strict_improvements": null
+        },
+        {
+          "round": 2,
+          "values": {
+            "r1": "t2",
+            "r2": "t1"
+          },
+          "changed": 2,
+          "strict_improvements": null
+        }
+      ],
+      "oscillations": 1,
+      "domains": {
+        "r1": [
+          null,
+          "t1",
+          "t2"
+        ],
+        "r2": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "neighbors": {
+        "r1": [
+          "r2"
+        ],
+        "r2": [
+          "r1"
+        ]
+      },
+      "penalties": {
+        "public_cost_bound": 10,
+        "idle": 21,
+        "conflict_pair": 63
+      },
+      "total_seconds": 0.9253607999999076,
+      "llm_config": {
+        "url": "http://127.0.0.1:11434",
+        "model": "qwen2.5:7b-instruct-q4_K_M",
+        "timeout": 30.0,
+        "temperature": 0.0,
+        "max_tokens": 64,
+        "call_budget": 8,
+        "load_timeout": 120.0,
+        "scenario_budget": 120.0,
+        "keep_alive": "5m",
+        "num_ctx": 2048,
+        "seed": 11,
+        "think": false
+      },
+      "llm_metrics": {
+        "calls": 4,
+        "successes": 4,
+        "rejections": 0,
+        "fallbacks": 0,
+        "latency_seconds": 0.9246584000002258,
+        "prompt_tokens": 1052,
+        "generated_tokens": 28,
+        "token_measurements": 4,
+        "errors": {},
+        "json_responses": 4,
+        "structured_responses": 4,
+        "legal_actions": 4,
+        "preprocess_seconds": 0.00010470000052009709,
+        "decode_seconds": 1.0900001143454574e-05,
+        "validation_seconds": 1.539999993838137e-05,
+        "timings_ns": {
+          "total_duration": 858376400,
+          "load_duration": 13799900,
+          "prompt_eval_duration": 531643000,
+          "eval_duration": 271528000
+        },
+        "duration_measurements": {
+          "total_duration": 4,
+          "load_duration": 4,
+          "prompt_eval_duration": 4,
+          "eval_duration": 4
+        },
+        "structured_response_rate": 1.0,
+        "legal_action_rate": 1.0,
+        "json_response_rate": 1.0,
+        "fallback_rate": 0.0,
+        "decisions": 4,
+        "generation_tokens_per_second": 103.12012020859727,
+        "mean_latency_seconds": 0.23116460000005645,
+        "scenario_elapsed_seconds": 0.9249618000003466,
+        "scenario_budget_overrun_seconds": 0.0
+      },
+      "llm_trace": [
+        {
+          "observation": {
+            "tick": 0,
+            "grid": {
+              "width": 5,
+              "height": 1,
+              "obstacles": []
+            },
+            "robot": {
+              "id": "r1",
+              "position": [
+                0,
+                0
+              ],
+              "capacity": 1,
+              "available": true
+            },
+            "tasks": [
+              {
+                "id": "t1",
+                "pickup": [
+                  4,
+                  0
+                ],
+                "destination": [
+                  4,
+                  0
+                ],
+                "load": 1,
+                "handling_ticks": 1,
+                "deadline": null
+              },
+              {
+                "id": "t2",
+                "pickup": [
+                  0,
+                  0
+                ],
+                "destination": [
+                  0,
+                  0
+                ],
+                "load": 1,
+                "handling_ticks": 1,
+                "deadline": null
+              }
+            ],
+            "own_costs": {
+              "t1": 6,
+              "t2": 2
+            },
+            "current_action": "t2",
+            "messages": [
+              {
+                "sender": "r2",
+                "action": "t1"
+              }
+            ]
+          },
+          "allowed_actions": [
+            null,
+            "t1",
+            "t2"
+          ],
+          "action": null,
+          "fallback": false,
+          "error": null,
+          "prompt_tokens": 265,
+          "generated_tokens": 6,
+          "latency_seconds": 0.29621380000025965,
+          "raw_response": {
+            "model": "qwen2.5:7b-instruct-q4_K_M",
+            "created_at": "2026-10-15T17:24:20.0273119Z",
+            "message": {
+              "role": "assistant",
+              "content": "{\"action\": null}"
+            },
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 274939600,
+            "load_duration": 3176500,
+            "prompt_eval_count": 265,
+            "prompt_eval_cached_count": 0,
+            "prompt_eval_duration": 210899000,
+            "eval_count": 6,
+            "eval_duration": 57799000
+          },
+          "raw_content": "{\"action\": null}",
+          "json_valid": true,
+          "structured_valid": true,
+          "action_legal": true,
+          "action_valid": true,
+          "error_detail": null,
+          "metadata": {
+            "model": "qwen2.5:7b-instruct-q4_K_M",
+            "created_at": "2026-10-15T17:24:20.0273119Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 274939600,
+            "load_duration": 3176500,
+            "prompt_eval_count": 265,
+            "prompt_eval_cached_count": 0,
+            "prompt_eval_duration": 210899000,
+            "eval_count": 6,
+            "eval_duration": 57799000
+          },
+          "timings_ns": {
+            "total_duration": 274939600,
+            "load_duration": 3176500,
+            "prompt_eval_duration": 210899000,
+            "eval_duration": 57799000
+          },
+          "timings_seconds": {
+            "total_duration": 0.2749396,
+            "load_duration": 0.0031765,
+            "prompt_eval_duration": 0.210899,
+            "eval_duration": 0.057799
+          },
+          "preprocess_seconds": 2.500000027794158e-05,
+          "decode_seconds": 3.4000004234258085e-06,
+          "validation_seconds": 3.3999995139311068e-06,
+          "request_seconds": 0.2961737000005087,
+          "request_timeout_seconds": 30.0,
+          "request_timeout_overrun_seconds": 0.0,
+          "scenario_elapsed_seconds": 0.29621380000025965,
+          "scenario_remaining_seconds": 119.70378619999974,
+          "scenario_budget_overrun_seconds": 0.0,
+          "suggested_command": null
+        },
+        {
+          "observation": {
+            "tick": 0,
+            "grid": {
+              "width": 5,
+              "height": 1,
+              "obstacles": []
+            },
+            "robot": {
+              "id": "r2",
+              "position": [
+                4,
+                0
+              ],
+              "capacity": 1,
+              "available": true
+            },
+            "tasks": [
+              {
+                "id": "t1",
+                "pickup": [
+                  4,
+                  0
+                ],
+                "destination": [
+                  4,
+                  0
+                ],
+                "load": 1,
+                "handling_ticks": 1,
+                "deadline": null
+              },
+              {
+                "id": "t2",
+                "pickup": [
+                  0,
+                  0
+                ],
+                "destination": [
+                  0,
+                  0
+                ],
+                "load": 1,
+                "handling_ticks": 1,
+                "deadline": null
+              }
+            ],
+            "own_costs": {
+              "t1": 2,
+              "t2": 6
+            },
+            "current_action": "t1",
+            "messages": [
+              {
+                "sender": "r1",
+                "action": "t2"
+              }
+            ]
+          },
+          "allowed_actions": [
+            null,
+            "t1",
+            "t2"
+          ],
+          "action": null,
+          "fallback": false,
+          "error": null,
+          "prompt_tokens": 265,
+          "generated_tokens": 6,
+          "latency_seconds": 0.17249869999977818,
+          "raw_response": {
+            "model": "qwen2.5:7b-instruct-q4_K_M",
+            "created_at": "2026-10-15T17:24:20.1997449Z",
+            "message": {
+              "role": "assistant",
+              "content": "{\"action\": null}"
+            },
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 171313500,
+            "load_duration": 3632200,
+            "prompt_eval_count": 265,
+            "prompt_eval_cached_count": 76,
+            "prompt_eval_duration": 97439000,
+            "eval_count": 6,
+            "eval_duration": 57398000
+          },
+          "raw_content": "{\"action\": null}",
+          "json_valid": true,
+          "structured_valid": true,
+          "action_legal": true,
+          "action_valid": true,
+          "error_detail": null,
+          "metadata": {
+            "model": "qwen2.5:7b-instruct-q4_K_M",
+            "created_at": "2026-10-15T17:24:20.1997449Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 171313500,
+            "load_duration": 3632200,
+            "prompt_eval_count": 265,
+            "prompt_eval_cached_count": 76,
+            "prompt_eval_duration": 97439000,
+            "eval_count": 6,
+            "eval_duration": 57398000
+          },
+          "timings_ns": {
+            "total_duration": 171313500,
+            "load_duration": 3632200,
+            "prompt_eval_duration": 97439000,
+            "eval_duration": 57398000
+          },
+          "timings_seconds": {
+            "total_duration": 0.1713135,
+            "load_duration": 0.0036322,
+            "prompt_eval_duration": 0.097439,
+            "eval_duration": 0.057398
+          },
+          "preprocess_seconds": 2.789999962260481e-05,
+          "decode_seconds": 2.9000002541579306e-06,
+          "validation_seconds": 4.200000148557592e-06,
+          "request_seconds": 0.17245720000028086,
+          "request_timeout_seconds": 30.0,
+          "request_timeout_overrun_seconds": 0.0,
+          "scenario_elapsed_seconds": 0.46880979999968986,
+          "scenario_remaining_seconds": 119.53119020000031,
+          "scenario_budget_overrun_seconds": 0.0,
+          "suggested_command": null
+        },
+        {
+          "observation": {
+            "tick": 0,
+            "grid": {
+              "width": 5,
+              "height": 1,
+              "obstacles": []
+            },
+            "robot": {
+              "id": "r1",
+              "position": [
+                0,
+                0
+              ],
+              "capacity": 1,
+              "available": true
+            },
+            "tasks": [
+              {
+                "id": "t1",
+                "pickup": [
+                  4,
+                  0
+                ],
+                "destination": [
+                  4,
+                  0
+                ],
+                "load": 1,
+                "handling_ticks": 1,
+                "deadline": null
+              },
+              {
+                "id": "t2",
+                "pickup": [
+                  0,
+                  0
+                ],
+                "destination": [
+                  0,
+                  0
+                ],
+                "load": 1,
+                "handling_ticks": 1,
+                "deadline": null
+              }
+            ],
+            "own_costs": {
+              "t1": 6,
+              "t2": 2
+            },
+            "current_action": null,
+            "messages": [
+              {
+                "sender": "r2",
+                "action": null
+              }
+            ]
+          },
+          "allowed_actions": [
+            null,
+            "t1",
+            "t2"
+          ],
+          "action": "t2",
+          "fallback": false,
+          "error": null,
+          "prompt_tokens": 261,
+          "generated_tokens": 8,
+          "latency_seconds": 0.22951709999961167,
+          "raw_response": {
+            "model": "qwen2.5:7b-instruct-q4_K_M",
+            "created_at": "2026-10-15T17:24:20.4291057Z",
+            "message": {
+              "role": "assistant",
+              "content": "{\"action\": \"t2\"}"
+            },
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 208772800,
+            "load_duration": 3974800,
+            "prompt_eval_count": 261,
+            "prompt_eval_cached_count": 74,
+            "prompt_eval_duration": 112504000,
+            "eval_count": 8,
+            "eval_duration": 80179000
+          },
+          "raw_content": "{\"action\": \"t2\"}",
+          "json_valid": true,
+          "structured_valid": true,
+          "action_legal": true,
+          "action_valid": true,
+          "error_detail": null,
+          "metadata": {
+            "model": "qwen2.5:7b-instruct-q4_K_M",
+            "created_at": "2026-10-15T17:24:20.4291057Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 208772800,
+            "load_duration": 3974800,
+            "prompt_eval_count": 261,
+            "prompt_eval_cached_count": 74,
+            "prompt_eval_duration": 112504000,
+            "eval_count": 8,
+            "eval_duration": 80179000
+          },
+          "timings_ns": {
+            "total_duration": 208772800,
+            "load_duration": 3974800,
+            "prompt_eval_duration": 112504000,
+            "eval_duration": 80179000
+          },
+          "timings_seconds": {
+            "total_duration": 0.2087728,
+            "load_duration": 0.0039748,
+            "prompt_eval_duration": 0.112504,
+            "eval_duration": 0.080179
+          },
+          "preprocess_seconds": 2.550000044720946e-05,
+          "decode_seconds": 2.4000000848900527e-06,
+          "validation_seconds": 4.300000000512227e-06,
+          "request_seconds": 0.2294805000001361,
+          "request_timeout_seconds": 30.0,
+          "request_timeout_overrun_seconds": 0.0,
+          "scenario_elapsed_seconds": 0.698435100000097,
+          "scenario_remaining_seconds": 119.3015648999999,
+          "scenario_budget_overrun_seconds": 0.0,
+          "suggested_command": null
+        },
+        {
+          "observation": {
+            "tick": 0,
+            "grid": {
+              "width": 5,
+              "height": 1,
+              "obstacles": []
+            },
+            "robot": {
+              "id": "r2",
+              "position": [
+                4,
+                0
+              ],
+              "capacity": 1,
+              "available": true
+            },
+            "tasks": [
+              {
+                "id": "t1",
+                "pickup": [
+                  4,
+                  0
+                ],
+                "destination": [
+                  4,
+                  0
+                ],
+                "load": 1,
+                "handling_ticks": 1,
+                "deadline": null
+              },
+              {
+                "id": "t2",
+                "pickup": [
+                  0,
+                  0
+                ],
+                "destination": [
+                  0,
+                  0
+                ],
+                "load": 1,
+                "handling_ticks": 1,
+                "deadline": null
+              }
+            ],
+            "own_costs": {
+              "t1": 2,
+              "t2": 6
+            },
+            "current_action": null,
+            "messages": [
+              {
+                "sender": "r1",
+                "action": null
+              }
+            ]
+          },
+          "allowed_actions": [
+            null,
+            "t1",
+            "t2"
+          ],
+          "action": "t1",
+          "fallback": false,
+          "error": null,
+          "prompt_tokens": 261,
+          "generated_tokens": 8,
+          "latency_seconds": 0.2264288000005763,
+          "raw_response": {
+            "model": "qwen2.5:7b-instruct-q4_K_M",
+            "created_at": "2026-10-15T17:24:20.6555035Z",
+            "message": {
+              "role": "assistant",
+              "content": "{\"action\": \"t1\"}"
+            },
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 203350500,
+            "load_duration": 3016400,
+            "prompt_eval_count": 261,
+            "prompt_eval_cached_count": 109,
+            "prompt_eval_duration": 110801000,
+            "eval_count": 8,
+            "eval_duration": 76152000
+          },
+          "raw_content": "{\"action\": \"t1\"}",
+          "json_valid": true,
+          "structured_valid": true,
+          "action_legal": true,
+          "action_valid": true,
+          "error_detail": null,
+          "metadata": {
+            "model": "qwen2.5:7b-instruct-q4_K_M",
+            "created_at": "2026-10-15T17:24:20.6555035Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 203350500,
+            "load_duration": 3016400,
+            "prompt_eval_count": 261,
+            "prompt_eval_cached_count": 109,
+            "prompt_eval_duration": 110801000,
+            "eval_count": 8,
+            "eval_duration": 76152000
+          },
+          "timings_ns": {
+            "total_duration": 203350500,
+            "load_duration": 3016400,
+            "prompt_eval_duration": 110801000,
+            "eval_duration": 76152000
+          },
+          "timings_seconds": {
+            "total_duration": 0.2033505,
+            "load_duration": 0.0030164,
+            "prompt_eval_duration": 0.110801,
+            "eval_duration": 0.076152
+          },
+          "preprocess_seconds": 2.6300000172341242e-05,
+          "decode_seconds": 2.200000380980782e-06,
+          "validation_seconds": 3.5000002753804438e-06,
+          "request_seconds": 0.22639330000038171,
+          "request_timeout_seconds": 30.0,
+          "request_timeout_overrun_seconds": 0.0,
+          "scenario_elapsed_seconds": 0.9249618000003466,
+          "scenario_remaining_seconds": 119.07503819999965,
+          "scenario_budget_overrun_seconds": 0.0,
+          "suggested_command": null
+        }
+      ],
+      "quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 4,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "cardinality_gap": 0,
+      "cost_gap_at_optimal_cardinality": 0
+    }
+  },
+  "ollama_preload": {
+    "status": "ok",
+    "error": null,
+    "error_detail": null,
+    "endpoint": "/api/generate",
+    "timeout_seconds": 120.0,
+    "latency_seconds": 37.75726399999985,
+    "response": {
+      "model": "qwen2.5:7b-instruct-q4_K_M",
+      "created_at": "2026-10-15T17:24:19.000881Z",
+      "response": "",
+      "done": true,
+      "done_reason": "load"
+    },
+    "timings_ns": {},
+    "timings_seconds": {},
+    "model": "qwen2.5:7b-instruct-q4_K_M",
+    "operation": "preload"
+  },
+  "selection_source": "docs\\results\\v2\\ollama-selection-20261015\\report.json",
+  "execution": {
+    "current": {
+      "tick": 12,
+      "finished": true,
+      "all_tasks_completed": true,
+      "robots": {
+        "r1": {
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "available": true,
+          "unavailable": false,
+          "task_id": null,
+          "handling_remaining": 0,
+          "resource_id": null,
+          "path": []
+        },
+        "r2": {
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "available": true,
+          "unavailable": false,
+          "task_id": null,
+          "handling_remaining": 0,
+          "resource_id": null,
+          "path": []
+        }
+      },
+      "tasks": {
+        "t1": {
+          "state": "completed",
+          "robot_id": "r2",
+          "arrival_tick": 0,
+          "completed_tick": 2,
+          "late": false
+        },
+        "t2": {
+          "state": "completed",
+          "robot_id": "r1",
+          "arrival_tick": 0,
+          "completed_tick": 2,
+          "late": false
+        }
+      },
+      "resources": {}
+    },
+    "events": [
+      {
+        "tick": 0,
+        "kind": "assigned",
+        "robot_id": "r1",
+        "task_id": "t2"
+      },
+      {
+        "tick": 0,
+        "kind": "assigned",
+        "robot_id": "r2",
+        "task_id": "t1"
+      },
+      {
+        "tick": 1,
+        "kind": "collected",
+        "robot_id": "r1",
+        "task_id": "t2"
+      },
+      {
+        "tick": 1,
+        "kind": "collected",
+        "robot_id": "r2",
+        "task_id": "t1"
+      },
+      {
+        "tick": 2,
+        "kind": "delivered",
+        "robot_id": "r1",
+        "task_id": "t2",
+        "late": false
+      },
+      {
+        "tick": 2,
+        "kind": "delivered",
+        "robot_id": "r2",
+        "task_id": "t1",
+        "late": false
+      }
+    ],
+    "invalid_decisions": 0
+  }
+}

@@ -1,0 +1,775 @@
+{
+  "tick": 0,
+  "reference_proven": true,
+  "methods": {
+    "fifo": {
+      "assignments": [
+        [
+          "r1",
+          "t1"
+        ],
+        [
+          "r2",
+          "t2"
+        ]
+      ],
+      "estimated_cost": 12,
+      "status": "HEURISTIC",
+      "optimal": false,
+      "total_seconds": 2.8299999939918052e-05,
+      "quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 12,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "logical_messages": 0,
+      "transmissions": 0,
+      "cardinality_gap": 0,
+      "cost_gap_at_optimal_cardinality": 8
+    },
+    "cpsat": {
+      "assignments": [
+        [
+          "r2",
+          "t1"
+        ],
+        [
+          "r1",
+          "t2"
+        ]
+      ],
+      "estimated_cost": 4,
+      "status": "OPTIMAL",
+      "optimal": true,
+      "phases": [
+        "OPTIMAL",
+        "OPTIMAL"
+      ],
+      "total_seconds": 1.0385495000000446,
+      "quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 4,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "logical_messages": 0,
+      "transmissions": 0,
+      "cardinality_gap": 0,
+      "cost_gap_at_optimal_cardinality": 0
+    },
+    "cnp": {
+      "assignments": [
+        [
+          "r2",
+          "t1"
+        ],
+        [
+          "r1",
+          "t2"
+        ]
+      ],
+      "estimated_cost": 4,
+      "status": "NEGOTIATED",
+      "optimal": false,
+      "messages": [
+        {
+          "type": "announce",
+          "sender": "r1",
+          "recipient": "all",
+          "task_id": "t1"
+        },
+        {
+          "type": "request",
+          "sender": "r1",
+          "recipient": "r1",
+          "task_id": "t1"
+        },
+        {
+          "type": "offer",
+          "sender": "r1",
+          "recipient": "r1",
+          "task_id": "t1",
+          "cost": 6
+        },
+        {
+          "type": "request",
+          "sender": "r1",
+          "recipient": "r2",
+          "task_id": "t1"
+        },
+        {
+          "type": "offer",
+          "sender": "r2",
+          "recipient": "r1",
+          "task_id": "t1",
+          "cost": 2
+        },
+        {
+          "type": "award",
+          "sender": "r1",
+          "recipient": "r2",
+          "task_id": "t1",
+          "cost": 2
+        },
+        {
+          "type": "accept",
+          "sender": "r2",
+          "recipient": "r1",
+          "task_id": "t1",
+          "reason": "committed"
+        },
+        {
+          "type": "reject",
+          "sender": "r1",
+          "recipient": "r1",
+          "task_id": "t1",
+          "reason": "other_offer_selected"
+        },
+        {
+          "type": "announce",
+          "sender": "r1",
+          "recipient": "all",
+          "task_id": "t2"
+        },
+        {
+          "type": "request",
+          "sender": "r1",
+          "recipient": "r1",
+          "task_id": "t2"
+        },
+        {
+          "type": "offer",
+          "sender": "r1",
+          "recipient": "r1",
+          "task_id": "t2",
+          "cost": 2
+        },
+        {
+          "type": "request",
+          "sender": "r1",
+          "recipient": "r2",
+          "task_id": "t2"
+        },
+        {
+          "type": "refuse",
+          "sender": "r2",
+          "recipient": "r1",
+          "task_id": "t2",
+          "reason": "busy_or_unavailable"
+        },
+        {
+          "type": "award",
+          "sender": "r1",
+          "recipient": "r1",
+          "task_id": "t2",
+          "cost": 2
+        },
+        {
+          "type": "accept",
+          "sender": "r1",
+          "recipient": "r1",
+          "task_id": "t2",
+          "reason": "committed"
+        }
+      ],
+      "total_seconds": 5.499999997482519e-05,
+      "quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 4,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "logical_messages": 15,
+      "transmissions": 8,
+      "cardinality_gap": 0,
+      "cost_gap_at_optimal_cardinality": 0
+    },
+    "dsa": {
+      "method": "dsa",
+      "assignments": [
+        [
+          "r1",
+          "t2"
+        ],
+        [
+          "r2",
+          "t1"
+        ]
+      ],
+      "estimated_cost": 4,
+      "optimal": false,
+      "status": "CONFIRMED",
+      "stop_reason": "LOCAL_OPTIMUM",
+      "seed": 11,
+      "probability": 0.7,
+      "round_budget": 1,
+      "rounds": 1,
+      "message_budget": 100000,
+      "messages": [
+        {
+          "type": "domain",
+          "round": 0,
+          "sender": "r1",
+          "recipient": "all",
+          "tasks": [
+            "t1",
+            "t2"
+          ]
+        },
+        {
+          "type": "domain",
+          "round": 0,
+          "sender": "r2",
+          "recipient": "all",
+          "tasks": [
+            "t1",
+            "t2"
+          ]
+        },
+        {
+          "type": "value",
+          "round": 1,
+          "sender": "r1",
+          "recipient": "r2",
+          "action": "t2"
+        },
+        {
+          "type": "value",
+          "round": 1,
+          "sender": "r2",
+          "recipient": "r1",
+          "action": "t1"
+        },
+        {
+          "type": "claim",
+          "round": 2,
+          "sender": "r1",
+          "recipient": "r2",
+          "action": "t2"
+        },
+        {
+          "type": "claim",
+          "round": 2,
+          "sender": "r2",
+          "recipient": "r1",
+          "action": "t1"
+        },
+        {
+          "type": "confirmed",
+          "round": 2,
+          "sender": "r1",
+          "recipient": "r2",
+          "action": "t2"
+        },
+        {
+          "type": "confirmed",
+          "round": 2,
+          "sender": "r2",
+          "recipient": "r1",
+          "action": "t1"
+        }
+      ],
+      "logical_messages": 8,
+      "transmissions": 8,
+      "initialization_transmissions": 2,
+      "optimization_transmissions": 2,
+      "confirmation_transmissions": 4,
+      "minimum_confirmation_budget": 6,
+      "confirmation_abandonments": 0,
+      "raw_assignments": [
+        [
+          "r1",
+          "t2"
+        ],
+        [
+          "r2",
+          "t1"
+        ]
+      ],
+      "raw_quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 4,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "final_quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 4,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "history": [
+        {
+          "round": 1,
+          "values": {
+            "r1": "t2",
+            "r2": "t1"
+          },
+          "changed": 0,
+          "strict_improvements": 0
+        }
+      ],
+      "oscillations": 0,
+      "domains": {
+        "r1": [
+          null,
+          "t1",
+          "t2"
+        ],
+        "r2": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "neighbors": {
+        "r1": [
+          "r2"
+        ],
+        "r2": [
+          "r1"
+        ]
+      },
+      "penalties": {
+        "public_cost_bound": 10,
+        "idle": 21,
+        "conflict_pair": 63
+      },
+      "total_seconds": 0.00017980000029638177,
+      "quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 4,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "cardinality_gap": 0,
+      "cost_gap_at_optimal_cardinality": 0
+    },
+    "exhaustive": {
+      "assignments": [
+        [
+          "r1",
+          "t2"
+        ],
+        [
+          "r2",
+          "t1"
+        ]
+      ],
+      "estimated_cost": 4,
+      "optimal": true,
+      "status": "OPTIMAL",
+      "states": 9,
+      "states_checked": 9,
+      "total_seconds": 7.580000010420918e-05,
+      "quality": {
+        "cardinality": 2,
+        "unique_tasks": 2,
+        "estimated_cost": 4,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "logical_messages": 0,
+      "transmissions": 0,
+      "cardinality_gap": 0,
+      "cost_gap_at_optimal_cardinality": 0
+    },
+    "llm": {
+      "method": "llm",
+      "assignments": [],
+      "estimated_cost": 0,
+      "optimal": false,
+      "status": "CONFIRMED",
+      "stop_reason": "ROUND_BUDGET",
+      "seed": 11,
+      "probability": 0.7,
+      "round_budget": 1,
+      "rounds": 1,
+      "message_budget": 100000,
+      "messages": [
+        {
+          "type": "domain",
+          "round": 0,
+          "sender": "r1",
+          "recipient": "all",
+          "tasks": [
+            "t1",
+            "t2"
+          ]
+        },
+        {
+          "type": "domain",
+          "round": 0,
+          "sender": "r2",
+          "recipient": "all",
+          "tasks": [
+            "t1",
+            "t2"
+          ]
+        },
+        {
+          "type": "value",
+          "round": 1,
+          "sender": "r1",
+          "recipient": "r2",
+          "action": "t2"
+        },
+        {
+          "type": "value",
+          "round": 1,
+          "sender": "r2",
+          "recipient": "r1",
+          "action": "t1"
+        },
+        {
+          "type": "claim",
+          "round": 2,
+          "sender": "r1",
+          "recipient": "r2",
+          "action": null
+        },
+        {
+          "type": "claim",
+          "round": 2,
+          "sender": "r2",
+          "recipient": "r1",
+          "action": null
+        },
+        {
+          "type": "confirmed",
+          "round": 2,
+          "sender": "r1",
+          "recipient": "r2",
+          "action": null
+        },
+        {
+          "type": "confirmed",
+          "round": 2,
+          "sender": "r2",
+          "recipient": "r1",
+          "action": null
+        }
+      ],
+      "logical_messages": 8,
+      "transmissions": 8,
+      "initialization_transmissions": 2,
+      "optimization_transmissions": 2,
+      "confirmation_transmissions": 4,
+      "minimum_confirmation_budget": 6,
+      "confirmation_abandonments": 0,
+      "raw_assignments": [],
+      "raw_quality": {
+        "cardinality": 0,
+        "unique_tasks": 0,
+        "estimated_cost": 0,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "final_quality": {
+        "cardinality": 0,
+        "unique_tasks": 0,
+        "estimated_cost": 0,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "history": [
+        {
+          "round": 1,
+          "values": {
+            "r1": null,
+            "r2": null
+          },
+          "changed": 2,
+          "strict_improvements": null
+        }
+      ],
+      "oscillations": 0,
+      "domains": {
+        "r1": [
+          null,
+          "t1",
+          "t2"
+        ],
+        "r2": [
+          null,
+          "t1",
+          "t2"
+        ]
+      },
+      "neighbors": {
+        "r1": [
+          "r2"
+        ],
+        "r2": [
+          "r1"
+        ]
+      },
+      "penalties": {
+        "public_cost_bound": 10,
+        "idle": 21,
+        "conflict_pair": 63
+      },
+      "total_seconds": 20.112783300000046,
+      "llm_metrics": {
+        "calls": 2,
+        "successes": 0,
+        "rejections": 2,
+        "fallbacks": 2,
+        "latency_seconds": 20.112415099999907,
+        "prompt_tokens": 0,
+        "generated_tokens": 0,
+        "errors": {
+          "timeout": 2
+        }
+      },
+      "llm_trace": [
+        {
+          "observation": {
+            "tick": 0,
+            "grid": {
+              "width": 5,
+              "height": 1,
+              "obstacles": []
+            },
+            "robot": {
+              "id": "r1",
+              "position": [
+                0,
+                0
+              ],
+              "capacity": 1,
+              "available": true
+            },
+            "tasks": [
+              {
+                "id": "t1",
+                "pickup": [
+                  4,
+                  0
+                ],
+                "destination": [
+                  4,
+                  0
+                ],
+                "load": 1,
+                "handling_ticks": 1,
+                "deadline": null
+              },
+              {
+                "id": "t2",
+                "pickup": [
+                  0,
+                  0
+                ],
+                "destination": [
+                  0,
+                  0
+                ],
+                "load": 1,
+                "handling_ticks": 1,
+                "deadline": null
+              }
+            ],
+            "own_costs": {
+              "t1": 6,
+              "t2": 2
+            },
+            "current_action": "t2",
+            "messages": [
+              {
+                "sender": "r2",
+                "action": "t1"
+              }
+            ]
+          },
+          "allowed_actions": [
+            null,
+            "t1",
+            "t2"
+          ],
+          "action": null,
+          "fallback": true,
+          "error": "timeout",
+          "latency_seconds": 10.070839699999851
+        },
+        {
+          "observation": {
+            "tick": 0,
+            "grid": {
+              "width": 5,
+              "height": 1,
+              "obstacles": []
+            },
+            "robot": {
+              "id": "r2",
+              "position": [
+                4,
+                0
+              ],
+              "capacity": 1,
+              "available": true
+            },
+            "tasks": [
+              {
+                "id": "t1",
+                "pickup": [
+                  4,
+                  0
+                ],
+                "destination": [
+                  4,
+                  0
+                ],
+                "load": 1,
+                "handling_ticks": 1,
+                "deadline": null
+              },
+              {
+                "id": "t2",
+                "pickup": [
+                  0,
+                  0
+                ],
+                "destination": [
+                  0,
+                  0
+                ],
+                "load": 1,
+                "handling_ticks": 1,
+                "deadline": null
+              }
+            ],
+            "own_costs": {
+              "t1": 2,
+              "t2": 6
+            },
+            "current_action": "t1",
+            "messages": [
+              {
+                "sender": "r1",
+                "action": "t2"
+              }
+            ]
+          },
+          "allowed_actions": [
+            null,
+            "t1",
+            "t2"
+          ],
+          "action": null,
+          "fallback": true,
+          "error": "timeout",
+          "latency_seconds": 10.041575400000056
+        }
+      ],
+      "quality": {
+        "cardinality": 0,
+        "unique_tasks": 0,
+        "estimated_cost": 0,
+        "conflict_pairs": 0,
+        "feasible": true,
+        "errors": []
+      },
+      "cardinality_gap": 2,
+      "cost_gap_at_optimal_cardinality": null,
+      "llm_config": {
+        "url": "http://localhost:11434",
+        "model": "qwen2.5-coder:7b",
+        "timeout": 8.0,
+        "temperature": 0.0,
+        "max_tokens": 32,
+        "call_budget": 2
+      }
+    }
+  },
+  "execution": {
+    "current": {
+      "tick": 12,
+      "finished": true,
+      "all_tasks_completed": false,
+      "robots": {
+        "r1": {
+          "position": [
+            0,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "available": true,
+          "unavailable": false,
+          "task_id": null,
+          "handling_remaining": 0,
+          "resource_id": null,
+          "path": []
+        },
+        "r2": {
+          "position": [
+            4,
+            0
+          ],
+          "capacity": 1,
+          "state": "idle",
+          "available": true,
+          "unavailable": false,
+          "task_id": null,
+          "handling_remaining": 0,
+          "resource_id": null,
+          "path": []
+        }
+      },
+      "tasks": {
+        "t1": {
+          "state": "pending",
+          "robot_id": null,
+          "arrival_tick": 0,
+          "completed_tick": null,
+          "late": false
+        },
+        "t2": {
+          "state": "pending",
+          "robot_id": null,
+          "arrival_tick": 0,
+          "completed_tick": null,
+          "late": false
+        }
+      },
+      "resources": {}
+    },
+    "events": [],
+    "invalid_decisions": 0
+  },
+  "ollama_probe": {
+    "url": "http://localhost:11434",
+    "models_detected": [
+      "devstral:24b",
+      "qwen2.5-coder:14b",
+      "qwen2.5-coder:7b"
+    ],
+    "model": "qwen2.5-coder:7b",
+    "timeout": 8.0,
+    "temperature": 0.0,
+    "max_tokens": 32,
+    "call_budget": 2,
+    "rounds": 1,
+    "seed": 11,
+    "real_requests": true,
+    "successful_generations": 0,
+    "token_counts_note": "No token counts were returned before the timeouts; zero is the sum of reported counts, not evidence that the server generated zero tokens."
+  }
+}

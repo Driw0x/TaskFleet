@@ -68,7 +68,8 @@ function markerTitle(marker: { pickup: boolean; position: Position; tasks: strin
       <input v-model="filters[key]" type="checkbox" :data-testid="`filter-${key}`">{{ label }}
     </label>
   </fieldset>
-  <div class="warehouse-scroll"><svg class="warehouse" :viewBox="`-18 -18 ${instance.width * cell + 36} ${instance.height * cell + 36}`" role="group" aria-label="Entrepôt interactif">
+  <div class="warehouse-scroll"><svg class="warehouse" :viewBox="`-18 -18 ${instance.width * cell + 36} ${instance.height * cell + 36}`"
+    :style="{ maxWidth: `${(instance.width * cell + 36) * 1.25}px`, minWidth: `${instance.width * cell + 36}px` }" role="group" aria-label="Entrepôt interactif">
     <title>Entrepôt {{ instance.width }} × {{ instance.height }} — tick {{ snapshot.tick }}</title>
     <defs>
       <pattern id="cells" :width="cell" :height="cell" patternUnits="userSpaceOnUse"><rect :width="cell" :height="cell" fill="#f5f8fb" stroke="#d7e1eb" stroke-width="1" /></pattern>
@@ -85,8 +86,8 @@ function markerTitle(marker: { pickup: boolean; position: Position; tasks: strin
        @click="emit('selectResource', String(id))" @keydown.enter.prevent="emit('selectResource', String(id))" @keydown.space.prevent="emit('selectResource', String(id))">
       <rect x="-30" y="-30" width="60" height="60" rx="6" fill="#eee6ff" :stroke="resource.holders.length >= resource.capacity ? '#ac3850' : '#845fb7'" stroke-width="2" />
       <rect x="-29" y="-29" width="58" height="17" rx="3" fill="#eee6ff" />
-      <text x="-28" y="-19" class="station-label" :textLength="String(id).length > 8 ? 39 : undefined" lengthAdjust="spacingAndGlyphs">{{ id }}</text>
-      <text x="29" y="-19" class="station-count">{{ resource.holders.length }}/{{ resource.capacity }}</text>
+      <text x="-28" y="-19" class="station-label" :textLength="String(id).length > 6 ? 39 : undefined" lengthAdjust="spacingAndGlyphs">{{ id }}</text>
+      <text x="29" y="-19" class="station-count" :textLength="`${resource.holders.length}/${resource.capacity}`.length > 4 ? 17 : undefined" lengthAdjust="spacingAndGlyphs">{{ resource.holders.length }}/{{ resource.capacity }}</text>
       <title>{{ id }} [{{ resource.position.join(',') }}] — {{ resource.holders.length }} place(s) occupée(s) sur {{ resource.capacity }} ; {{ resource.holders.length >= resource.capacity ? 'saturée' : 'disponible' }} ; robots : {{ resource.holders.join(', ') || 'aucun' }}</title>
     </g>
     <polyline v-if="task" data-testid="task-relation" :points="`${endpoint(task.pickup, true)} ${endpoint(task.destination, false)}`" class="task-relation" marker-end="url(#relation-arrow)"><title>Relation logique {{ task.id }} : collecte vers destination, sans indication de trajet</title></polyline>
@@ -122,7 +123,20 @@ function markerTitle(marker: { pickup: boolean; position: Position; tasks: strin
       <title>{{ robot.id }} — case [{{ robot.position.join(',') }}], {{ robot.unavailable ? 'suspendu' : robotLabels[robot.state] ?? robot.state }}, tâche {{ robot.task_id || 'aucune' }}{{ robot.colocated > 1 ? ` ; ${robot.colocated} robots dans cette case` : '' }}</title>
     </g>
   </svg></div>
-  <div class="legend" aria-label="Légende de l’entrepôt">
+  <div class="warehouse-legend" aria-label="Légende de l’entrepôt">
+    <div class="legend" data-testid="warehouse-legend-primary">
+      <span v-if="robots.length"><i class="legend-robot" />Robot</span>
+      <span v-if="instance.obstacles.length"><i class="legend-cell obstacle-symbol" />Obstacle</span>
+      <template v-if="markers.length"><span class="orange">■ Collecte</span><span class="green">◆ Destination</span></template>
+      <span v-if="Object.keys(snapshot.resources).length" class="purple">▣ Station : occupation / capacité</span>
+      <span v-if="Object.values(snapshot.resources).some(resource => resource.holders.length >= resource.capacity)" class="red">▣ Station saturée</span>
+      <span v-if="robots.some(robot => robot.unavailable)" class="red">● Robot suspendu</span>
+      <span v-if="participants.size" class="orange">◌ Échange CNP</span>
+      <span v-if="path" class="route-key">– – Chemin restant prévu</span>
+      <span v-if="task" class="purple">··· Collecte vers livraison</span>
+    </div>
+    <details><summary>Lire la grille et les symboles</summary>
+    <div class="legend">
     <span><i class="legend-robot" />Robot</span><span><i class="legend-robot selected-symbol" />Robot sélectionné / affecté</span><span><i class="legend-robot shared-symbol" />Robots dans une même case</span>
     <span><i class="legend-cell obstacle-symbol" />Obstacle</span><span><i class="legend-cell" />Case libre</span>
     <span class="orange">■ Collecte</span><span class="green">◆ Destination de livraison</span><span class="purple">▣ Station / ressource partagée</span><span class="red">▣ Station saturée</span>
@@ -130,7 +144,19 @@ function markerTitle(marker: { pickup: boolean; position: Position; tasks: strin
     <span><i class="state-swatch completed-symbol" />Terminée (opacité 45 %)</span><span><i class="state-swatch scheduled-symbol" />Non arrivée (opacité 55 %)</span>
     <span class="red">● Robot suspendu</span><span class="orange">◌ Échange CNP</span>
     <span class="route-key">– – Chemin restant prévu</span><span class="purple">··· Relation collecte / livraison</span>
-  </div>
+    </div>
   <p class="hint">ID ou ×nombre de tâches par extrémité ; traits d’état sous les badges. Survol : détails. Sélection : inspection et tâche toujours visible malgré les filtres. Éléments sans rapport atténués. Stations : places occupées / capacité. Les collisions physiques ne sont pas simulées.</p>
-  <p class="hint mobile-grid-hint">Faire défiler la grille horizontalement pour voir toutes les cases.</p>
+    </details>
+  </div>
+  <p v-if="instance.width > 3 || instance.height > 6" class="hint mobile-grid-hint">Faire défiler la grille si toutes les cases ne sont pas visibles.</p>
 </template>
+
+<style scoped>
+.warehouse-scroll { max-height: 560px; overflow: auto; }
+.warehouse { height: auto; min-height: 0; max-height: none; margin-inline: auto; }
+.legend { font-size: 12px; margin-top: 10px; }
+.station-label { font-size: 9px; }
+.station-count { font-size: 8px; }
+.warehouse-legend details { margin-top: 10px; }
+.warehouse-legend details[open] > summary { margin-bottom: 8px; }
+</style>

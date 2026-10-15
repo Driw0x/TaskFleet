@@ -1,0 +1,16 @@
+{
+  "width": 3,
+  "height": 1,
+  "horizon": 16,
+  "seed": 7,
+  "robots": [
+    {"id": "a", "position": [0, 0], "capacity": 1},
+    {"id": "b", "position": [2, 0], "capacity": 1}
+  ],
+  "tasks": [
+    {"id": "flexible", "pickup": [0, 0], "destination": [0, 0], "deadline": 9, "handling_ticks": 2},
+    {"id": "urgent", "pickup": [0, 0], "destination": [0, 0], "deadline": 4, "handling_ticks": 2},
+    {"id": "transport", "pickup": [0, 0], "destination": [2, 0], "deadline": 4}
+  ],
+  "unavailability": [{"robot_id": "a", "start_tick": 1, "end_tick": 6}]
+}

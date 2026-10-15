@@ -75,3 +75,43 @@ Explorer les simulations et créer des instances avec Vue 3, TypeScript, SVG et 
 - [x] Fournir une instance complexe reproductible avec des différences opérationnelles mesurées entre les trois stratégies.
 - [x] Générer des instances aléatoires valides à dimensions fixes et graine locale, éditables et exportables.
 - [x] Remplacer Streamlit par une API locale et un frontend réactif, sans modifier le moteur scientifique.
+
+## V2 scientifique — Terminée
+
+### M7 — Advanced & Robust Scheduling
+
+Évaluer ordonnancement temporel, horizon glissant et robustesse sur scénarios finis.
+
+- [x] Modéliser précédences, trajets, capacités, stations, arrivées et retards avec CP-SAT ; minimiser retard total puis makespan.
+- [x] Rejouer les plans dans le moteur V1 : priorité ID, libération différée et réservation conservée pendant suspension.
+- [x] Replanifier sans événements futurs, avec tâches révélées, backlog conservé et engagements actifs gelés.
+- [x] Optimiser les files fixes par minimax : pire retard, puis pire makespan, avec achèvement dans chaque calendrier déclaré ; limiter les garanties aux scénarios et politiques énumérés.
+- [x] Vérifier les microcas par oracle, distinguer statuts et budgets, comparer les baselines à information explicite et publier les [résultats reproductibles](results/v2/m7.json).
+
+### M8 — Distributed Constraint Optimization
+
+Évaluer l'allocation distribuée par décisions locales et échanges entre agents.
+
+- [x] Implémenter DSA sur domaines tâche/attente, coûts privés et objectif cardinalité puis coût, sans optimisation centrale cachée.
+- [x] Confirmer les affectations par messages, sans doublons ni recours aux rejets du moteur.
+- [x] Vérifier les allocations par énumération et CP-SAT ; comparer FIFO/CNP, oscillations, budgets, messages et temps complet dans les [résultats reproductibles](results/v2/m8.json).
+- [x] Valider l'extension expérimentale Ollama : décisions locales réelles, légales et traçables, modèle choisi sur validation puis testé séparément ; cardinalité inférieure aux références ([preuves](results/v2/ollama-selection-20261015/report.json)).
+
+### M9 — Multi-Agent Path Finding
+
+Planifier des trajectoires compatibles sur un MAPF isolé à destinations fixes.
+
+- [x] Formaliser mouvements, attentes, conflits de sommets et échanges d'arêtes, avec buts absorbants et persistants.
+- [x] Implémenter planification prioritaire, réservations et CBS ; vérifier les plans indépendamment et comparer aux optima d'un oracle exhaustif.
+- [x] Borner les certificats au modèle et à l'horizon déclarés ; distinguer infaisabilité dans l'horizon, échec prioritaire et budget épuisé.
+- [x] Comparer coûts, réussites, priorités et budgets dans les [résultats reproductibles](results/v2/m9.json), sans modifier la physique V1.
+
+### M10 — Cooperative Multi-Agent Reinforcement Learning
+
+Évaluer l'apprentissage coopératif de l'allocation dans un domaine tabulaire borné.
+
+- [x] Réutiliser le moteur V1 avec observations locales, masques d'actions et départage commun aux politiques comparées.
+- [x] Tester récompense commune sur les tâches révélées restantes, transitions, terminaison et troncature d'horizon.
+- [x] Entraîner des Q-learners tabulaires, sauvegarder et recharger les politiques ; séparer entraînement, validation et test, avec sélection sur validation uniquement.
+- [x] Évaluer les politiques figées sur plusieurs graines face aux heuristiques ; conserver le résultat négatif de généralisation dans les [résultats reproductibles](results/v2/m10.json).
+- [x] Valider l'extension expérimentale Ollama : actions réelles, légales et traçables, modèle choisi sur validation puis testé séparément, sans supériorité générale démontrée ([preuves](results/v2/ollama-selection-20261015/report.json)).

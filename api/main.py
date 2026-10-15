@@ -15,9 +15,12 @@ from taskfleet.benchmark import run_benchmark
 from taskfleet.instances import generate_instance, loads_instance
 from taskfleet.metrics import metrics
 
+from .experiments import router as experiments_router
+
 logger = logging.getLogger(__name__)
 EXAMPLES = Path(__file__).resolve().parents[1] / "examples"
 app = FastAPI(title="TaskFleet", version="1.0")
+app.include_router(experiments_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://127.0.0.1:5173", "http://localhost:5173"],
