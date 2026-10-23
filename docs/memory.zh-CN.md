@@ -1,4 +1,4 @@
-[Français](memory.md) | [简体中文](memory.zh-CN.md)
+[English](memory.md) | [Français](memory.fr.md) | [简体中文](memory.zh-CN.md)
 
 <a id="mémoire-technique-taskfleet"></a>
 # 技术文档 TaskFleet
@@ -54,7 +54,7 @@ Python 版本在 `constraints.txt` 中指定，前端版本在 lockfile 中。�
 V1 版本为同步路线；V2 版本为异步且有界，完整内存中轨迹，无服务器持久化；仅适用于小规模实例。CORS 仅限前端本地访问 5173 端口。内部错误被记录并隐藏于客户端；非 JSON 错误保留 HTTP 状态码。已弃用 Starlette/HTTPX 在 TestClient 中。已移除 Streamlit；Matplotlib 为可选用于图表，pandas 作为 OR-Tools 的中间件。
 
 <a id="v2--terminée"></a>
-## V2 — 已完成
+## V2 - 已完成
 
 <a id="architecture-et-décisions-1"></a>
 ### 架构与决策

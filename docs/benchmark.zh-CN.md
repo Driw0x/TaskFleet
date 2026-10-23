@@ -1,4 +1,4 @@
-[Français](benchmark.md) | [简体中文](benchmark.zh-CN.md)
+[English](benchmark.md) | [Français](benchmark.fr.md) | [简体中文](benchmark.zh-CN.md)
 
 <a id="benchmark-et-métriques"></a>
 # 基准与度量标准

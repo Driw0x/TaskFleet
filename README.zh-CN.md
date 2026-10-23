@@ -1,7 +1,7 @@
-[Français](README.md) | [简体中文](README.zh-CN.md)
+[English](README.md) | [Français](README.fr.md) | [简体中文](README.zh-CN.md)
 
 <a id="taskfleet--multi-agent-warehouse-simulation"></a>
-# TaskFleet — 多智能体仓库模拟
+# TaskFleet - 多智能体仓库模拟
 
 TaskFleet 是一个确定性仓库仿真器，结合多智能体系统、运筹学与规划。统一的 Python 引擎用于比较 FIFO 分配、CP-SAT 优化与合同网协议（CNP）协调。
 
@@ -36,7 +36,7 @@ Pop-Location
 `constraints.txt` 固定已验证的 Python 版本；lockfile 固定了前端依赖。
 
 <a id="installation-ollama--optionnelle"></a>
-### 安装 Ollama — 可选
+### 安装 Ollama - 可选
 
 V1/V2 经典策略无需 LLM 即可运行。对于 M8/M10 扩展功能，需从 [Windows 官方网站](https://ollama.com/download/windows) 安装 Ollama，然后打开一个新的 PowerShell 终端。Windows 应用程序通常会自动在后台启动服务器；请参阅 [Windows 官方文档](https://docs.ollama.com/windows)。在 `http://127.0.0.1:11434` 处验证 CLI 和本地 API 响应：
 
@@ -145,7 +145,7 @@ Pop-Location
 
 **V1：M0 至 M6 已完成。** 请参阅 [路线图](docs/roadmap.zh-CN.md)。接下来的 Codex 会话必须明确读取 [技术文档](docs/memory.zh-CN.md)；该文档不会像仓库指令一样自动加载。
 
-**V2 — 已完成。** M7 至 M10 已实现、测试并评估：
+**V2 - 已完成。** M7 至 M10 已实现、测试并评估：
 
 - [M7](docs/results/v2/m7.json)：时间调度、滑动时间界和鲁棒优化。
 - [M8](docs/results/v2/m8.json)：分布式 DSA 优化和可选的本地 LLM 代理。

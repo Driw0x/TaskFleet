@@ -1,33 +1,31 @@
-# TaskFleet — Multi-Agent Warehouse Simulation
+[English](README.md) | [Français](README.fr.md) | [简体中文](README.zh-CN.md)
 
-[Français](README.md) | [简体中文](README.zh-CN.md)
+<a id="taskfleet--multi-agent-warehouse-simulation"></a>
+# TaskFleet - Multi-Agent Warehouse Simulation
 
 
-TaskFleet est un simulateur déterministe d'entrepôt combinant systèmes multi-agents,
-recherche opérationnelle et planification. Un moteur Python commun compare l'allocation
-FIFO, l'optimisation CP-SAT et la coordination Contract Net Protocol (CNP).
 
-## Fonctionnalités
+TaskFleet is a deterministic warehouse simulator combining multi-agent systems, operations research, and scheduling. A common Python engine compares FIFO allocation, CP-SAT optimization, and local negotiation via the Contract Net Protocol (CNP).
 
-- Grille discrète avec obstacles, robots autonomes, capacités et tâches de collecte/livraison.
-- Stations partagées, arrivées différées et suspension/reprise des robots.
-- Allocation FIFO, optimisation instantanée CP-SAT et négociation locale CNP.
-- Benchmarks reproductibles, métriques et exports CSV/JSON.
-- Interface Vue : entrepôt SVG, lecture/pause, vitesses, navigation temporelle et inspection
-  des robots, tâches, stations, chemins et messages CNP, sans requête API pendant le rejeu.
-- Édition, génération par graine, import/export JSON et comparaison des trois stratégies.
+<a id="fonctionnalités"></a>
+## Features
 
+- Discrete grid with obstacles, autonomous robots, capacities, and pickup/delivery tasks.
+- Shared stations, delayed arrivals, and robot suspension/resumption.
+- FIFO allocation, instant CP-SAT optimization, and local CNP negotiation.
+- Reproducible benchmarks, metrics, and CSV/JSON exports.
+- Vue Interface: SVG warehouse view, play/pause, speed controls, temporal navigation, and inspection of robots, tasks, stations, trajectories, and CNP messages, without API requests during replay.
+- Editing, generation from seed, JSON import/export, and comparison of the three strategies.
+
+<a id="technologies"></a>
 ## Technologies
 
-Python 3.12+, OR-Tools, FastAPI/Uvicorn, Vue 3, TypeScript et Vite.
-Tests : pytest, FastAPI TestClient, Vitest et Vue Test Utils.
-Matplotlib est optionnel pour les graphiques du benchmark.
-Environnement vérifié : Python 3.13.1 et Node 24.13.0.
+Python 3.12+, OR-Tools, FastAPI/Uvicorn, Vue 3, TypeScript and Vite. Tests: pytest, FastAPI TestClient, Vitest and Vue Test Utils. Matplotlib is optional for benchmark graphs. Verified environment: Python 3.13.1 and Node 24.13.0.
 
+<a id="installation"></a>
 ## Installation
 
-PowerShell, depuis la racine du dépôt. Installer Python 3.12+ et Node 20 (≥20.19),
-22 (≥22.12) ou 24+ :
+PowerShell, from the root of the repository. Install Python 3.12+ and Node 20 (≥20.19), 22 (≥22.12) or 24+, as required:
 
 ```powershell
 python -m venv .venv
@@ -37,31 +35,25 @@ npm.cmd ci
 Pop-Location
 ```
 
-`constraints.txt` fixe les versions Python vérifiées ; le lockfile fixe les dépendances frontend.
+`constraints.txt` pins the verified Python package versions; the lockfile pins the frontend dependencies.
 
-### Installation Ollama — optionnelle
+<a id="installation-ollama--optionnelle"></a>
+### Ollama Installation - optional
 
-Les stratégies classiques V1/V2 fonctionnent sans LLM. Pour les extensions M8/M10,
-installer Ollama depuis le [site officiel pour Windows](https://ollama.com/download/windows),
-puis ouvrir un nouveau terminal PowerShell. L'application Windows lance normalement le serveur
-en arrière-plan ; voir la [documentation Windows officielle](https://docs.ollama.com/windows).
-Vérifier la CLI et la réponse de l'API locale sur `http://127.0.0.1:11434` :
+The classic V1/V2 strategies work without LLM. For M8/M10 extensions, install Ollama from the [official Windows site](https://ollama.com/download/windows), then open a new PowerShell terminal. The Windows application typically starts the server in the background; see the [official Windows documentation](https://docs.ollama.com/windows). Verify the CLI and the local API response on `http://127.0.0.1:11434` :
 
 ```powershell
 ollama --version
 Invoke-RestMethod -Uri 'http://127.0.0.1:11434/api/version'
 ```
 
-La seconde commande doit renvoyer une version. Si le serveur ne répond pas, ouvrir Ollama
-depuis le menu Démarrer et réessayer. Pour un démarrage manuel, uniquement si aucun serveur
-n'écoute déjà sur ce port :
+The second command should return a version. If the server does not respond, open Ollama from the Start menu and retry. For manual startup, only if no server is already listening on this port :
 
 ```powershell
 ollama serve
 ```
 
-Laisser alors ce terminal ouvert et poursuivre dans un autre terminal. Consulter les modèles
-installés, puis télécharger les deux modèles de la sélection enregistrée :
+Leave this terminal open and proceed in another terminal. Check the installed models, then download the two models from the recorded selection :
 
 ```powershell
 ollama list
@@ -70,94 +62,54 @@ ollama pull qwen3:4b-instruct-2507-q4_K_M
 ollama list
 ```
 
-Les tags exacts figurent au catalogue officiel : [modèle M8](https://ollama.com/library/qwen2.5:7b-instruct-q4_K_M)
-et [modèle M10](https://ollama.com/library/qwen3:4b-instruct-2507-q4_K_M).
-Aucun modèle n'est téléchargé automatiquement par TaskFleet. Les performances et les temps
-de chargement dépendent du matériel. Exécuter ensuite les [exemples LLM](#extensions-llm)
-avec `--selection` et `--preload` ; la sélection vérifie les identifiants et les digests installés.
+The exact tags are listed in the official catalog: [model M8](https://ollama.com/library/qwen2.5:7b-instruct-q4_K_M) and [model M10](https://ollama.com/library/qwen3:4b-instruct-2507-q4_K_M). No model is automatically downloaded by TaskFleet. Performance and loading times depend on hardware. Run the [LLM examples](#extensions-llm) with `--selection` and `--preload`; the selection verifies the installed identifiers and digests.
 
-## Utilisation
+<a id="utilisation"></a>
+## Usage
 
-Premier terminal, depuis la racine :
+First terminal, from the root :
 
 ```powershell
 .\.venv\Scripts\python.exe -m uvicorn api.main:app --host 127.0.0.1 --port 8000
 ```
 
-Deuxième terminal :
+Second terminal :
 
 ```powershell
 Set-Location frontend
 npm.cmd run dev
 ```
 
-Ouvrir [l'application](http://127.0.0.1:5173) ou la
-[documentation API](http://127.0.0.1:8000/docs). Vite relaie `/api` vers FastAPI.
-Arrêter chaque serveur avec `Ctrl+C`.
+Open [the application](http://127.0.0.1:5173) or [the API documentation](http://127.0.0.1:8000/docs). Vite forwards `/api` to FastAPI. Stop each server with `Ctrl+C`.
 
-La navigation propose **Simulation d’entrepôt** et **Expériences scientifiques**.
-La simulation conserve son éditeur, sa génération, ses trois stratégies et son rejeu.
-Dans les expériences, choisir **Problème**, **Méthode**, **Instance**, puis **Lancer l'expérience**
-ou **Comparer les méthodes**. Le backend valide la compatibilité des instances avec la méthode ;
-l'instance créée ou importée dans la simulation est proposée comme **Instance utilisateur** si elle est compatible.
-Les quatre problèmes sont **Ordonnancement**, **Allocation distribuée**, **Planification multi-agent**
-et **Apprentissage coopératif**. Retour/Avancer, rechargement et liens directs restaurent la vue et le problème,
-par exemple `?view=experiences&problem=ordonnancement`. Les résultats restent en mémoire de la page ;
-un rechargement impose de relancer l'expérience.
+Navigation offers **Simulation d’entrepôt** (Warehouse Simulation) and **Expériences scientifiques** (Scientific Experiments). The simulation preserves its editor, generation, three strategies, and replay capability. In experiments, select **Problème** (Problem), **Méthode** (Method), **Instance**, then **Lancer l'expérience** (Launch experiment) or **Comparer les méthodes** (Compare methods). The backend validates compatibility between instances and methods; an instance created or imported into the simulation is proposed as **Instance utilisateur** (User instance) if it is compatible. The four problems are **Ordonnancement** (Scheduling), **Allocation distribuée** (Distributed Allocation), **Planification multi-agent** (Multi-Agent Planning), and **Apprentissage coopératif** (Cooperative Learning). Back/Forward, reload, and direct links restore the view and the problem, for example `?view=experiences&problem=ordonnancement`. Results remain in the page's memory; a reload requires relaunching the experiment.
 
-- **M7** : nominal, horizon glissant et minimax ; dates prévues/réalisées, plans vérifiés,
-  replanifications et secours. Essayer `m7.json` avec le budget par défaut de 0,2 ; pour
-  le robuste, `m7_robust.json` et `robust_scenarios.json`, puis choisir le scénario rejoué.
-  La comparaison distingue oracle hors ligne et état révélé ; les files nominales/robustes
-  sont comparées dans les mêmes calendriers déclarés.
-- **M8** : DSA ou coordination LLM ; domaines, décisions, messages et confirmations.
-  Seule l'allocation confirmée au tick initial est exécutée, sans réaffectation ultérieure.
-  FIFO/CNP/CP-SAT restent comparables sur cette même observation.
-- **M9** : prioritaire ou CBS ; grille, trajectoires, attentes, départs/buts et rejeu par tick.
-  La physique MAPF interdit les collisions et reste distincte de V1.
-- **M10** : aléatoire légale, heuristique, Q figée avec **Checkpoint figé**, ou LLM.
-  **Entraînement tabulaire court** limite le calcul à 30 épisodes, sélectionne sur validation
-  et évalue la politique figée sur une instance distincte. Le checkpoint de session devient
-  sélectionnable pour Q ; observations, actions, récompenses et événements restent inspectables.
+- M7: nominal, sliding horizon, and minimax; planned versus actual dates, verified plans, replanning, and fallbacks. Try `m7.json` with the default budget of 0.2; for robust, try `m7_robust.json` and `robust_scenarios.json`, then select the replayed scenario. The comparison distinguishes offline oracle and revealed state; nominal and robust queues are compared within the same declared calendars.
+- M8: DSA or LLM coordination; domains, decisions, messages, and confirmations. Only the allocation confirmed at the initial tick is executed, without any subsequent reassignment. FIFO/CNP/CP-SAT remain comparable on this same observation.
+- M9: priority or CBS; grid, trajectories, waits, departures/goals, and replay per tick. The MAPF physics prevents collisions and remains distinct from V1.
+- M10: legal random, heuristic, Q fixed with **Fixed Checkpoint**, or LLM. **Short tabular training** limits computation to 30 episodes, selects on validation, and evaluates the fixed policy on a distinct instance. The session checkpoint becomes selectable for Q; observations, actions, rewards, and events remain inspectable.
 
-Pour les variantes LLM M8/M10, cliquer **Vérifier Ollama**, puis conserver la sélection
-benchmark ou choisir un modèle installé. Les noms et digests sélectionnés sont vérifiés.
-Le préchargement possède son propre délai (120 s par défaut), distinct du budget des décisions ;
-le suivi reste actif pendant le chargement. Aucun téléchargement automatique ni entraînement RL
-du modèle Ollama. Les méthodes classiques restent disponibles sans serveur Ollama.
+For LLM variants M8/M10, click **Vérifier Ollama** (Verify Ollama), then keep the benchmark selection or choose an installed model. The selected names and digests are verified. Preloading has its own delay (120 seconds by default), separate from decision budgets; tracking remains active during loading. No automatic model download or RL training of the Ollama model. Classical methods remain available without an Ollama server.
 
-Résultats et comparaisons s'exportent en JSON ; lecture/pause, vitesse et curseur rejouent les
-traces localement. Infaisabilité, budget épuisé, exécution incomplète et erreurs sont explicites.
-L'API ajoute `GET /api/v2/catalog`, `GET /api/v2/ollama`, `POST /api/v2/jobs`
-et `GET /api/v2/jobs/{id}`, en conservant les routes V1. Deux workers exécutent au maximum
-quatre expériences actives ; 24 résultats sont conservés une heure. Résultats et checkpoints
-de session sont en mémoire et disparaissent au redémarrage. Benchmarks complets, oracle MAPF
-exhaustif et grands entraînements restent en CLI.
+Results and comparisons can be exported in JSON; playback/pause, speed, and cursor replay traces locally. Infeasibility, budget exhausted, incomplete execution, and errors are explicitly reported. The API adds `GET /api/v2/catalog`, `GET /api/v2/ollama`, `POST /api/v2/jobs`, and `GET /api/v2/jobs/{id}`, preserving V1 routes. At most two workers execute four active experiments; 24 results are retained for one hour. Results and session checkpoints are in memory and disappear upon restart. Complete benchmarks, exhaustive MAPF oracle, and large trainings remain in CLI.
 
-Validation finale du **15 octobre 2026** : **499 tests Python**, **101 tests Vue**, TypeScript,
-build Vite, compilation/imports et `pip check` réussis. Chrome a vérifié la simulation et les
-trois stratégies V1, les quatre problèmes scientifiques, les comparaisons, les rejeux et
-la navigation native. Les deux extensions Ollama ont produit des décisions structurées et
-légales réellement appliquées, sans secours : quatre appels en allocation distribuée et
-deux en apprentissage coopératif ; chaque exécution termine deux tâches. Ces contrôles
-fonctionnels ne constituent pas une nouvelle évaluation comparative des modèles.
+Final validation on **October 15, 2026**: **499 Python tests**, **101 Vue tests**, TypeScript, Vite build, compilation/import operations, and `pip check` successfully completed. Chrome verified the simulation and the three V1 strategies, the four scientific problems, the comparisons, the re-runs, and native navigation. The two Ollama extensions produced genuinely applied, structured, and legal decisions, without fallback: four calls in distributed allocation and two in cooperative learning; each execution completes two tasks. These functional checks do not constitute a new comparative evaluation of the models.
 
-Simulation et benchmark M5, depuis la racine :
+Simulation and benchmark M5, from the root:
 
 ```powershell
 .\.venv\Scripts\python.exe -m taskfleet examples/allocation.json --strategy cpsat --verify-repeat
 .\.venv\Scripts\python.exe -m taskfleet.benchmark --repeats 2 --json "$env:TEMP/taskfleet-m5.json" --csv "$env:TEMP/taskfleet-m5.csv"
 ```
 
-La CLI accepte aussi `--strategy fifo` et `--strategy cnp`.
-Pour reproduire le benchmark étendu :
+The CLI also accepts `--strategy fifo` and `--strategy cnp`. To reproduce the extended benchmark:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements-benchmark.txt -c constraints.txt
 .\.venv\Scripts\python.exe -m scripts.benchmark_extended --seeds 11 23 37 51 79 --repeats 2 --output "$env:TEMP/taskfleet-v1" --plots --compare docs/results/v1/report.json
 ```
 
-Tests et vérifications :
+Tests and verifications:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest -q -p no:cacheprovider --basetemp "$env:TEMP/taskfleet-v1-pytest"
@@ -172,49 +124,39 @@ npm.cmd audit
 Pop-Location
 ```
 
-Le répertoire `--basetemp` est réservé à pytest, qui le recrée hors du dépôt.
-Validation V1 du **14 octobre 2026** : **245 tests Python**, **25 tests Vue**, TypeScript et build Vite réussis.
+The directory `--basetemp` is reserved for pytest, which recreates it outside the repository. V1 validation on **October 14, 2026**: **245 Python tests**, **25 Vue tests**, TypeScript and Vite build successfully completed.
 
-## Résultats
+<a id="résultats"></a>
+## Results
 
-Benchmark étendu : **87 instances distinctes**, **92 scénarios de résolution**,
-**552 simulations** ; **468 complètes**, **84 incomplètes**, aucune erreur technique ni
-décision invalide. Les cinq scénarios `low_budget` réutilisent les instances `base`.
-La reproduction conserve instances, métriques déterministes, statuts et empreintes des traces.
+Extended benchmark: **87 distinct instances**, **92 solution scenarios**, **552 simulations**; **468 complete**, **84 incomplete**, no technical errors or invalid decisions. The five scenarios `low_budget` reuse the instances `base`. The reproduction preserves instances, deterministic metrics, statuses, and trace fingerprints.
 
-Sur `examples/complex_comparison.json`, les trois stratégies livrent les 18 tâches :
+On `examples/complex_comparison.json`, the three strategies deliver the 18 tasks:
 
-| Métrique | FIFO | CP-SAT | CNP |
+|Metric|FIFO|CP-SAT|CNP|
 |---|---:|---:|---:|
-| Makespan (ticks) | 154 | 114 | 142 |
-| Retard total (ticks) | 437 | 179 | 365 |
-| Distance (cases) | 340 | 279 | 312 |
-| Messages logiques | 0 | 0 | 1919 |
+|Makespan (ticks)| 154 | 114 | 142 |
+|Total delay (ticks)| 437 | 179 | 365 |
+|Distance (cases)| 340 | 279 | 312 |
+|Logical messages| 0 | 0 | 1919 |
 
-Ces observations concernent les scénarios étudiés. CP-SAT optimise l'affectation courante,
-sans preuve d'optimalité dynamique globale ; CNP est synchrone, sans réseau distribué réel.
-Les collisions physiques ne sont pas simulées. Un makespan incomplet reste indéfini.
-Les [résultats, hypothèses, graphiques et commandes de reproduction](docs/benchmark.md)
-détaillent les effectifs et les limites.
+These observations pertain to the scenarios studied. CP-SAT optimizes the current assignment, without proof of global dynamic optimality; CNP is synchronous, without a real distributed network. Physical collisions are not simulated. An incomplete makespan remains undefined. The [results, hypotheses, graphics, and reproduction commands](docs/benchmark.md) detail the staffing and limitations.
 
-## État du projet
+<a id="état-du-projet"></a>
+## Project status
 
-**V1 : M0 à M6 terminés.** Voir la [roadmap](docs/roadmap.md).
-Les prochaines sessions Codex doivent lire explicitement la [mémoire technique](docs/memory.md) ;
-ce document n'est pas chargé automatiquement comme instruction du dépôt.
+**V1: M0 to M6 completed.** See the [roadmap](docs/roadmap.md). The next Codex sessions must explicitly read the [technical development log](docs/memory.md); this document is not automatically loaded as a repository instruction.
 
-**V2 — Terminée.** M7 à M10 implémentés, testés et évalués :
+**V2 - Completed.** M7 to M10 implemented, tested, and evaluated:
 
-- [M7](docs/results/v2/m7.json) : ordonnancement temporel, horizon glissant et optimisation robuste.
-- [M8](docs/results/v2/m8.json) : optimisation distribuée DSA et agents LLM locaux optionnels.
-- [M9](docs/results/v2/m9.json) : Multi-Agent Path Finding, planification prioritaire et CBS.
-- [M10](docs/results/v2/m10.json) : apprentissage coopératif tabulaire et politique LLM locale optionnelle.
+- [M7](docs/results/v2/m7.json): temporal scheduling, sliding horizon, and robust optimization.
+- [M8](docs/results/v2/m8.json): distributed optimization DSA and optional local LLM agents.
+- [M9](docs/results/v2/m9.json): Multi-Agent Path Finding, priority planning, and CBS.
+- [M10](docs/results/v2/m10.json): tabular cooperative learning and optional local LLM policy.
 
-Garanties limitées aux domaines évalués, sans supériorité générale démontrée.
-Aucune généralisation apprise démontrée pour M10.
+Guarantees are limited to the evaluated domains, without demonstrated general superiority. No learned generalization is proven for M10.
 
-Les méthodes V2 sont aussi accessibles dans l'interface web ci-dessus. Les commandes CLI
-existantes restent disponibles et fonctionnent sans Ollama par défaut :
+The V2 methods are also accessible via the web interface above. The existing CLI commands remain available and function without Ollama by default:
 
 ```powershell
 .\.venv\Scripts\python.exe -m taskfleet.scheduling examples/m7.json --method nominal
@@ -225,7 +167,7 @@ existantes restent disponibles et fonctionnent sans Ollama par défaut :
 .\.venv\Scripts\python.exe -m taskfleet.marl evaluate docs/results/v2/m10-test-0.json --policy q --checkpoint docs/results/v2/m10-q-seed-0.json --trace --json "$env:TEMP/taskfleet-m10-evaluation.json"
 ```
 
-Reproduire les benchmarks V2 :
+Reproduce the V2 benchmarks:
 
 ```powershell
 .\.venv\Scripts\python.exe -m scripts.benchmark_scheduling --json "$env:TEMP/taskfleet-m7-benchmark.json"
@@ -234,14 +176,10 @@ Reproduire les benchmarks V2 :
 .\.venv\Scripts\python.exe -m scripts.benchmark_marl --episodes 60 --seeds 0 1 2 --output "$env:TEMP/taskfleet-m10"
 ```
 
-### Extensions LLM
+<a id="extensions-llm"></a>
+### LLM extensions
 
-Après l'[installation optionnelle d'Ollama](#installation-ollama--optionnelle), exécuter depuis
-la racine avec le serveur local actif. Réutiliser la
-[sélection figée](docs/results/v2/ollama-selection-20261015/report.json) : `--selection` vérifie
-le nom exact et le digest du modèle avant exécution ; `--preload` charge le modèle déjà installé
-avec un délai distinct du budget des décisions. Un digest différent entraîne un refus :
-refaire la sélection ou choisir explicitement un modèle avec `--model`.
+After [optional installation of Ollama](#installation-ollama--optionnelle), run from the root directory with the local server active. Reuse the [fixed selection](docs/results/v2/ollama-selection-20261015/report.json): `--selection` verifies the exact model name and digest before execution; `--preload` loads the already installed model with a distinct delay from the decision budget. A different digest results in rejection: redo the selection or explicitly choose a model with `--model`.
 
 ```powershell
 $selection = 'docs/results/v2/ollama-selection-20261015/report.json'
@@ -249,7 +187,7 @@ $selection = 'docs/results/v2/ollama-selection-20261015/report.json'
 .\.venv\Scripts\python.exe -m taskfleet.marl evaluate examples/allocation.json --policy llm --selection $selection --preload --trace --json "$env:TEMP/taskfleet-m10-selected.json"
 ```
 
-Reproduire cette sélection dans un dossier neuf, avec les cinq candidats déjà installés :
+Reproduce this selection in a new directory, with the five already installed candidates:
 
 ```powershell
 .\.venv\Scripts\python.exe -m scripts.benchmark_ollama --models qwen2.5-coder:7b qwen2.5-coder:14b devstral:24b qwen3:4b-instruct-2507-q4_K_M qwen2.5:7b-instruct-q4_K_M --url http://127.0.0.1:11434 --cold --repeats 2 --think false --output "$env:TEMP/taskfleet-ollama-benchmark"

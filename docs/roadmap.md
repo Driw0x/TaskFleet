@@ -1,122 +1,135 @@
+[English](roadmap.md) | [Français](roadmap.fr.md) | [简体中文](roadmap.zh-CN.md)
+
+<a id="roadmap"></a>
 # Roadmap
 
-[Français](roadmap.md) | [简体中文](roadmap.zh-CN.md)
 
-[README du projet](../README.md)
+[Project README](../README.md)
 
 
-M0 à M6 sont terminés et vérifiés.
+M0 to M6 are completed and verified.
 
-La consolidation V1 audite ces milestones et étend leur évaluation, sans nouveau milestone.
-Résultats et reproduction : [benchmark](benchmark.md).
+V1 consolidation audits these milestones and extends their evaluation, without introducing a new milestone. Results and reproduction: [benchmark](benchmark.md).
 
-## M0 — Modélisation du problème
+<a id="m0--modélisation-du-problème"></a>
+## M0 - Problem modeling
 
-Définir le modèle commun aux simulations et aux stratégies.
+Define the common model for simulations and strategies.
 
-- [x] Définir l’environnement, les agents, les tâches et les ressources partagées.
-- [x] Formaliser les contraintes de déplacement, de capacité et d’utilisation des ressources.
-- [x] Définir le format des instances de simulation.
+- [x] Define the environment, agents, tasks, and shared resources.
+- [x] Formalize constraints on movement, capacity, and resource utilization.
+- [x] Define the format of simulation instances.
 
-## M1 — Moteur de simulation
+<a id="m1--moteur-de-simulation"></a>
+## M1 - Simulation engine
 
-Exécuter une simulation reproductible dans un environnement discret.
+Execute a reproducible simulation in a discrete environment.
 
-- [x] Implémenter l’environnement discret et les obstacles.
-- [x] Représenter les robots, les tâches et les déplacements.
-- [x] Gérer l’accès aux ressources partagées.
-- [x] Charger les instances de simulation.
-- [x] Assurer la reproductibilité, notamment par le contrôle des graines aléatoires.
-- [x] Tester les comportements du moteur avec pytest.
+- [x] Implement the discrete environment and obstacles.
+- [x] Represent robots, tasks, and movements.
+- [x] Manage access to shared resources.
+- [x] Load simulation instances.
+- [x] Ensure reproducibility, particularly through random seed control.
+- [x] Test the scheduler's behaviors with pytest.
 
-## M2 — Allocation centralisée
+<a id="m2--allocation-centralisée"></a>
+## M2 - Centralized allocation
 
-Développer et comparer les stratégies d’allocation et d’ordonnancement centralisées.
+Develop and compare centralized allocation and scheduling strategies.
 
-- [x] Implémenter la baseline heuristique FIFO.
-- [x] Implémenter l’optimisation avec OR-Tools CP-SAT.
-- [x] Comparer les allocations sur des instances communes.
+- [x] Implement the baseline heuristic FIFO.
+- [x] Implement optimization using OR-Tools CP-SAT.
+- [x] Compare allocations on common instances.
 
-## M3 — Coordination multi-agent
+<a id="m3--coordination-multi-agent"></a>
+## M3 - Multi-agent scheduling
 
-Permettre aux agents de négocier et d’attribuer les tâches.
+Enable agents to negotiate and assign tasks.
 
-- [x] Implémenter les décisions locales des agents.
-- [x] Ajouter la communication entre agents.
-- [x] Implémenter le Contract Net Protocol (CNP), de l’annonce à l’attribution des tâches.
-- [x] Intégrer les négociations au moteur de simulation.
+- [x] Implement local agent decisions.
+- [x] Add communication between agents.
+- [x] Implement the Contract Net Protocol (CNP), from task announcement to task assignment.
+- [x] Integrate negotiations into the simulation engine.
 
-## M4 — Environnement dynamique
+<a id="m4--environnement-dynamique"></a>
+## M4 - Dynamic environment
 
-Adapter les décisions aux changements pendant la simulation.
+Adapt decisions to changes during simulation.
 
-- [x] Gérer l’arrivée de nouvelles tâches.
-- [x] Gérer l’indisponibilité des robots.
-- [x] Adapter l’allocation et les plans aux perturbations.
+- [x] Manage the arrival of new tasks.
+- [x] Manage robot unavailability.
+- [x] Adapt allocation and plans to disturbances.
 
-## M5 — Benchmark et évaluation
+<a id="m5--benchmark-et-évaluation"></a>
+## M5 - Benchmark and evaluation
 
-Évaluer les stratégies dans des conditions comparables.
+Evaluate strategies under comparable conditions.
 
-- [x] Définir les scénarios expérimentaux et les métriques.
-- [x] Exécuter des expériences reproductibles avec les stratégies implémentées.
-- [x] Comparer les stratégies sur les mêmes scénarios.
-- [x] Analyser et documenter les résultats réellement obtenus.
+- [x] Define experimental scenarios and metrics.
+- [x] Execute reproducible experiments with implemented strategies.
+- [x] Compare strategies on the same scenarios.
+- [x] Analyze and document actually obtained results.
 
-## M6 — Interface web interactive
+<a id="m6--interface-web-interactive"></a>
+## M6 - Interactive web interface
 
-Explorer les simulations et créer des instances avec Vue 3, TypeScript, SVG et FastAPI.
+Explore simulations and create instances using Vue 3, TypeScript, SVG and FastAPI.
 
-- [x] Visualiser l’entrepôt, les obstacles et les robots.
-- [x] Rejouer les simulations et afficher les interactions entre agents.
-- [x] Lire, mettre en pause, régler la vitesse et naviguer localement dans les snapshots.
-- [x] Sélectionner robots, tâches et stations ; inspecter état, affectation, occupation et historique au tick courant.
-- [x] Fournir une légende permanente, des filtres de tâches et distinguer chemins Python et relations collecte/livraison.
-- [x] Permettre la sélection des stratégies implémentées.
-- [x] Créer des instances personnalisées : robots, capacités, tâches, obstacles, dimensions et ressources.
-- [x] Importer et exporter les instances au format défini en M0.
-- [x] Visualiser les résultats des simulations et des comparaisons.
-- [x] Afficher automatiquement une comparaison persistante avec métriques M5, erreurs et invalidation des résultats périmés.
-- [x] Fournir une instance complexe reproductible avec des différences opérationnelles mesurées entre les trois stratégies.
-- [x] Générer des instances aléatoires valides à dimensions fixes et graine locale, éditables et exportables.
-- [x] Remplacer Streamlit par une API locale et un frontend réactif, sans modifier le moteur scientifique.
+- [x] Visualize the warehouse, obstacles, and robots.
+- [x] Replay simulations and display interactions between agents.
+- [x] Play, pause, adjust speed, and navigate locally within snapshots.
+- [x] Select robots, tasks, and stations; inspect current tick state, assignment, occupancy, and history.
+- [x] Provide a permanent legend, task filters, and distinguish Python paths from collection/delivery relationships.
+- [x] Enable selection of implemented strategies.
+- [x] Create custom instances: robots, capacities, tasks, obstacles, dimensions, and resources.
+- [x] Import and export instances in the format defined in M0.
+- [x] Visualize simulation and comparison results.
+- [x] Automatically display a persistent comparison with M5 metrics, errors, and invalidation of expired results.
+- [x] Provide a complex, reproducible instance with measurable operational differences between the three strategies.
+- [x] Generate valid random instances with fixed dimensions and local seed, editable and exportable.
+- [x] Replace Streamlit with a local API and a reactive frontend, without modifying the scientific engine.
 
-## V2 scientifique — Terminée
+<a id="v2-scientifique--terminée"></a>
+## V2 scientific - Completed
 
-### M7 — Advanced & Robust Scheduling
+<a id="m7--advanced--robust-scheduling"></a>
+### M7 - Advanced & Robust Scheduling
 
-Évaluer ordonnancement temporel, horizon glissant et robustesse sur scénarios finis.
+Evaluate temporal scheduling, sliding horizon, and robustness on finite scenarios.
 
-- [x] Modéliser précédences, trajets, capacités, stations, arrivées et retards avec CP-SAT ; minimiser retard total puis makespan.
-- [x] Rejouer les plans dans le moteur V1 : priorité ID, libération différée et réservation conservée pendant suspension.
-- [x] Replanifier sans événements futurs, avec tâches révélées, backlog conservé et engagements actifs gelés.
-- [x] Optimiser les files fixes par minimax : pire retard, puis pire makespan, avec achèvement dans chaque calendrier déclaré ; limiter les garanties aux scénarios et politiques énumérés.
-- [x] Vérifier les microcas par oracle, distinguer statuts et budgets, comparer les baselines à information explicite et publier les [résultats reproductibles](results/v2/m7.json).
+- [x] Model precedences, trajectories, capacities, stations, arrivals, and delays using CP-SAT; minimize total tardiness then makespan.
+- [x] Replay plans in the V1 engine: preserve priority ID, deferred release, and reservation during suspension.
+- [x] Reschedule without future events, with revealed tasks, backlog preserved, and active commitments frozen.
+- [x] Optimize fixed queues via minimax: worst-case tardiness, then worst-case makespan, with completion in each declared schedule; limit guarantees to enumerated scenarios and policies.
+- [x] Verify microcases via oracle, distinguish statuses and budgets, compare baselines with explicit information, and publish the [reproducible results](results/v2/m7.json).
 
-### M8 — Distributed Constraint Optimization
+<a id="m8--distributed-constraint-optimization"></a>
+### M8 - Distributed Constraint Optimization
 
-Évaluer l'allocation distribuée par décisions locales et échanges entre agents.
+Evaluate distributed allocation through local decisions and agent-to-agent exchanges.
 
-- [x] Implémenter DSA sur domaines tâche/attente, coûts privés et objectif cardinalité puis coût, sans optimisation centrale cachée.
-- [x] Confirmer les affectations par messages, sans doublons ni recours aux rejets du moteur.
-- [x] Vérifier les allocations par énumération et CP-SAT ; comparer FIFO/CNP, oscillations, budgets, messages et temps complet dans les [résultats reproductibles](results/v2/m8.json).
-- [x] Valider l'extension expérimentale Ollama : décisions locales réelles, légales et traçables, modèle choisi sur validation puis testé séparément ; cardinalité inférieure aux références ([preuves](results/v2/ollama-selection-20261015/report.json)).
+- [x] Implement DSA on task/waiting domains, private costs, and cardinality objective, then cost, without hidden central optimization.
+- [x] Confirm assignments via messages, without duplicates or reliance on engine rejections.
+- [x] Verify allocations via enumeration and CP-SAT; compare FIFO/CNP, oscillations, budgets, messages, and total time in the [reproducible results](results/v2/m8.json).
+- [x] Validate the experimental extension Ollama: real, legal, and traceable local decisions, model selected based on validation and separately tested; cardinality below references ([proofs](results/v2/ollama-selection-20261015/report.json)).
 
-### M9 — Multi-Agent Path Finding
+<a id="m9--multi-agent-path-finding"></a>
+### M9 - Multi-Agent Path Finding
 
-Planifier des trajectoires compatibles sur un MAPF isolé à destinations fixes.
+Plan compatible trajectories on an isolated MAPF with fixed destinations.
 
-- [x] Formaliser mouvements, attentes, conflits de sommets et échanges d'arêtes, avec buts absorbants et persistants.
-- [x] Implémenter planification prioritaire, réservations et CBS ; vérifier les plans indépendamment et comparer aux optima d'un oracle exhaustif.
-- [x] Borner les certificats au modèle et à l'horizon déclarés ; distinguer infaisabilité dans l'horizon, échec prioritaire et budget épuisé.
-- [x] Comparer coûts, réussites, priorités et budgets dans les [résultats reproductibles](results/v2/m9.json), sans modifier la physique V1.
+- [x] Formalize movements, waits, vertex conflicts, and edge exchanges, with absorbing and persistent goals.
+- [x] Implement prioritized planning, reservations, and CBS; independently verify plans and compare against exhaustive oracle optima.
+- [x] Bound certificates to declared model and horizon; distinguish infeasibility within horizon, priority failure, and budget exhaustion.
+- [x] Compare costs, successes, priorities, and budgets within [reproducible results](results/v2/m9.json), without modifying the V1 physics.
 
-### M10 — Cooperative Multi-Agent Reinforcement Learning
+<a id="m10--cooperative-multi-agent-reinforcement-learning"></a>
+### M10 - Cooperative Multi-Agent Reinforcement Learning
 
-Évaluer l'apprentissage coopératif de l'allocation dans un domaine tabulaire borné.
+Evaluate cooperative learning of allocation in a bounded tabular domain.
 
-- [x] Réutiliser le moteur V1 avec observations locales, masques d'actions et départage commun aux politiques comparées.
-- [x] Tester récompense commune sur les tâches révélées restantes, transitions, terminaison et troncature d'horizon.
-- [x] Entraîner des Q-learners tabulaires, sauvegarder et recharger les politiques ; séparer entraînement, validation et test, avec sélection sur validation uniquement.
-- [x] Évaluer les politiques figées sur plusieurs graines face aux heuristiques ; conserver le résultat négatif de généralisation dans les [résultats reproductibles](results/v2/m10.json).
-- [x] Valider l'extension expérimentale Ollama : actions réelles, légales et traçables, modèle choisi sur validation puis testé séparément, sans supériorité générale démontrée ([preuves](results/v2/ollama-selection-20261015/report.json)).
+- [x] Reuse the V1 engine with local observations, action masks, and shared policies among compared policies.
+- [x] Test a common reward across remaining revealed tasks, transitions, termination, and horizon truncation.
+- [x] Train tabular Q-learners, save and reload policies; separate training, validation, and testing, with selection only on validation.
+- [x] Evaluate fixed policies across multiple seeds against heuristics; preserve the negative generalization result in the [reproducible results](results/v2/m10.json).
+- [x] Validate the experimental extension Ollama: real, legal, and traceable actions, model selected on validation and separately tested on test, without demonstrated general superiority ([evidence](results/v2/ollama-selection-20261015/report.json)).
