@@ -1,5 +1,10 @@
 # Roadmap
 
+[Français](roadmap.md) | [简体中文](roadmap.zh-CN.md)
+
+[README du projet](../README.md)
+
+
 M0 à M6 sont terminés et vérifiés.
 
 La consolidation V1 audite ces milestones et étend leur évaluation, sans nouveau milestone.

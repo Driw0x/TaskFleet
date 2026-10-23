@@ -1,5 +1,8 @@
 # Benchmark et métriques
 
+[Français](benchmark.md) | [简体中文](benchmark.zh-CN.md)
+
+
 ## Problème et stratégies
 
 Comparer FIFO, CP-SAT et CNP pour affecter des tâches de collecte/livraison à des robots,

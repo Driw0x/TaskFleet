@@ -1,5 +1,8 @@
 # Mémoire technique TaskFleet
 
+[Français](memory.md) | [简体中文](memory.zh-CN.md)
+
+
 **À lire explicitement au début des prochaines sessions Codex.** Ce fichier n'est pas
 chargé automatiquement comme instruction du dépôt.
 

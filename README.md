@@ -1,5 +1,8 @@
 # TaskFleet — Multi-Agent Warehouse Simulation
 
+[Français](README.md) | [简体中文](README.zh-CN.md)
+
+
 TaskFleet est un simulateur déterministe d'entrepôt combinant systèmes multi-agents,
 recherche opérationnelle et planification. Un moteur Python commun compare l'allocation
 FIFO, l'optimisation CP-SAT et la coordination Contract Net Protocol (CNP).
