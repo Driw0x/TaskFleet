@@ -276,7 +276,7 @@ onUnmounted(() => { disposed = true; revision++; operation++; pause(); clearTime
     <label>Instance<select v-model="example" data-testid="example"><option v-for="name in examples" :key="name">{{ name }}</option></select></label>
     <button data-testid="load-example" @click="load">Charger</button>
     <label>Stratégie<select v-model="strategy" data-testid="strategy"><option value="fifo">FIFO</option><option value="cpsat">CP-SAT</option><option value="cnp">CNP</option></select></label>
-    <label>Budget CP-SAT<input v-model.number="budget" type="number" min="0.001" step="0.1" data-testid="budget"></label>
+    <label>Budget CP-SAT (maximum 1)<input v-model.number="budget" type="number" min="0.001" max="1" step="0.1" data-testid="budget"></label>
     <button class="primary" data-testid="run" :disabled="!valid || !!busy" @click="calculate(false)">{{ busy === 'simulation' ? 'Calcul…' : 'Lancer' }}</button>
     <button data-testid="compare" :disabled="!valid || !!busy" @click="calculate(true)">{{ busy === 'comparaison' ? 'Comparaison…' : 'Comparer' }}</button>
   </header>

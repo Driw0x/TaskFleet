@@ -79,6 +79,10 @@ describe('TaskFleet UI', () => {
     expect(wrapper.get('[data-robot="r1"]').attributes('data-position')).toBe('0,0')
     expect(wrapper.text()).toContain('Station')
     expect(wrapper.get('[data-testid="run"]').attributes('disabled')).toBeUndefined()
+    expect(wrapper.get('[data-testid="budget"]').attributes('max')).toBe('1')
+    expect(wrapper.get('[data-testid="generate-width"]').attributes('max')).toBe('20')
+    expect(wrapper.get('[data-testid="generate-task_count"]').attributes('max')).toBe('24')
+    expect(wrapper.text()).toContain('grille 20 × 20, 8 robots, 24 tâches, horizon 300')
   })
 
   it('replays previous/next/slider/end/restart without network and synchronizes inspection/events', async () => {

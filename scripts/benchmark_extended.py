@@ -5,7 +5,6 @@ Run from the repository root: python -m scripts.benchmark_extended --output resu
 
 import argparse
 from collections import Counter, defaultdict
-from copy import deepcopy
 from datetime import datetime, timezone
 from importlib.metadata import version
 import json

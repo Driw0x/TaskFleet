@@ -31,7 +31,7 @@ from .cnp import contract_net
 from .engine import Simulation
 from .instances import load_instance
 from .models import Grid, Robot, Task, TaskState
-from .ollama import OllamaClient, OllamaConfig
+from .ollama import OllamaClient
 
 
 @dataclass

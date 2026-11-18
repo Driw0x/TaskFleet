@@ -8,6 +8,10 @@ const emit = defineEmits<{
   import: [content: string]; draft: [content: string]; export: []
 }>()
 type Collection = 'robots' | 'tasks' | 'obstacles' | 'resources' | 'unavailability'
+const maximums = {
+  width: 20, height: 20, horizon: 300, seed: 2147483647,
+  robots: 8, tasks: 24, obstacles: 400, resources: 30, unavailability: 50,
+} as const
 type Column = { label: string; path: (string | number)[]; text?: boolean; nullable?: boolean }
 const coordinate = (label: string, name: string, axis: number): Column => ({ label, path: [name, axis] })
 const tables: { key: Collection; label: string; columns: Column[]; row: unknown }[] = [
@@ -37,6 +41,9 @@ function rows(key: Collection, row?: unknown, index?: number) {
   else data[key].push(JSON.parse(JSON.stringify(row)))
   emit('change', data)
 }
+function fieldMaximum(key: string) {
+  return maximums[key as keyof typeof maximums]
+}
 const generation = reactive({ width: 8, height: 6, robot_count: 3, task_count: 10, seed: 42 })
 watch(() => props.instance, instance => {
   Object.assign(generation, { width: instance.width, height: instance.height, robot_count: instance.robots.length, task_count: instance.tasks.length, seed: instance.seed ?? 0 })
@@ -53,7 +60,7 @@ async function importFile(event: Event) {
   <details class="panel editor" data-testid="editor">
     <summary>Créer / modifier l’instance</summary>
     <div class="fields">
-      <label v-for="[key, label] in [['width', 'Largeur'], ['height', 'Hauteur'], ['horizon', 'Horizon'], ['seed', 'Graine (métadonnée)']]" :key="key">{{ label }}<input type="number" step="1" :data-testid="`edit-${key}`" :value="instance[key as 'width' | 'height' | 'horizon' | 'seed']" @input="edit([key!], $event)"></label>
+      <label v-for="[key, label] in [['width', 'Largeur'], ['height', 'Hauteur'], ['horizon', 'Horizon'], ['seed', 'Graine (métadonnée)']]" :key="key">{{ label }}<input type="number" step="1" :max="fieldMaximum(key!)" :data-testid="`edit-${key}`" :value="instance[key as 'width' | 'height' | 'horizon' | 'seed']" @input="edit([key!], $event)"></label>
     </div>
     <p class="hint">Échéance vide = aucune. Manutention à chaque extrémité. Indisponibilité : [début, fin exclue).</p>
     <details v-for="table in tables" :key="table.key" class="editor-table">
@@ -61,11 +68,12 @@ async function importFile(event: Event) {
       <div class="table-scroll"><table><thead><tr><th v-for="column in table.columns" :key="column.label">{{ column.label }}</th><th>Action</th></tr></thead><tbody>
         <tr v-for="(row, index) in instance[table.key]" :key="index"><td v-for="column in table.columns" :key="column.label"><input :type="column.text ? 'text' : 'number'" step="1" :aria-label="`${table.label} ${index + 1} ${column.label}`" :value="valueAt(row, column.path)" @input="edit([table.key, index, ...column.path], $event, column.text)"></td><td><button :aria-label="`Supprimer ${table.label} ${index + 1}`" @click="rows(table.key, undefined, index)">Supprimer</button></td></tr>
       </tbody></table></div>
-      <button @click="rows(table.key, table.row)">Ajouter {{ table.label }}</button>
+      <button :disabled="instance[table.key].length >= maximums[table.key]" @click="rows(table.key, table.row)">Ajouter {{ table.label }}</button>
     </details>
     <form class="generator" @submit.prevent="emit('generate', { ...generation, horizon: instance.horizon, obstacles: instance.obstacles, resources: instance.resources })">
       <h3>Génération aléatoire</h3>
-      <div class="fields"><label v-for="[key, label] in [['width', 'Largeur du terrain'], ['height', 'Hauteur du terrain'], ['robot_count', 'Nombre de robots'], ['task_count', 'Nombre de tâches'], ['seed', 'Graine aléatoire']]" :key="key">{{ label }}<input v-model.number="generation[key as keyof typeof generation]" :data-testid="`generate-${key}`" type="number" step="1" :min="key === 'width' || key === 'height' ? 1 : 0" required></label></div>
+      <div class="fields"><label v-for="[key, label] in [['width', 'Largeur du terrain'], ['height', 'Hauteur du terrain'], ['robot_count', 'Nombre de robots'], ['task_count', 'Nombre de tâches'], ['seed', 'Graine aléatoire']]" :key="key">{{ label }}<input v-model.number="generation[key as keyof typeof generation]" :data-testid="`generate-${key}`" type="number" step="1" :min="key === 'width' || key === 'height' ? 1 : 0" :max="fieldMaximum(key === 'robot_count' ? 'robots' : key === 'task_count' ? 'tasks' : key!)" required></label></div>
+      <p class="hint">Limites Web : grille 20 × 20, 8 robots, 24 tâches, horizon 300.</p>
       <p class="hint">Obstacles, stations et horizon conservés. Robots, tâches et indisponibilités remplacés. Faisabilité sans garantie d’achèvement.</p>
       <button :disabled="busy" data-testid="generate">Générer une instance</button>
     </form>

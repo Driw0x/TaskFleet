@@ -10,12 +10,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
 
-from taskfleet import Simulation, from_dict, load_instance
+from taskfleet import Simulation, load_instance
 from taskfleet.benchmark import run_benchmark
-from taskfleet.instances import generate_instance, loads_instance
+from taskfleet.instances import generate_instance
 from taskfleet.metrics import metrics
 
 from .experiments import router as experiments_router
+from .limits import (
+    MAX_ARRAY_LENGTHS, MAX_HEIGHT, MAX_HORIZON, MAX_SEED, MAX_SOLVER_BUDGET, MAX_WIDTH,
+    parse_web_instance, validate_web_payload_size,
+)
 
 logger = logging.getLogger(__name__)
 EXAMPLES = Path(__file__).resolve().parents[1] / "examples"
@@ -36,7 +40,7 @@ class InstanceRequest(BaseModel):
 
 
 class ComparisonRequest(InstanceRequest):
-    solver_budget: StrictFloat = Field(default=1.0, gt=0, allow_inf_nan=False)
+    solver_budget: StrictFloat = Field(default=1.0, gt=0, le=MAX_SOLVER_BUDGET, allow_inf_nan=False)
 
 
 class SimulationRequest(ComparisonRequest):
@@ -45,19 +49,19 @@ class SimulationRequest(ComparisonRequest):
 
 class GenerationRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    width: StrictInt = Field(ge=1)
-    height: StrictInt = Field(ge=1)
-    robot_count: StrictInt = Field(ge=0)
-    task_count: StrictInt = Field(ge=0)
-    seed: StrictInt = Field(ge=0)
-    horizon: StrictInt = Field(default=100, ge=0)
-    obstacles: list = Field(default_factory=list)
-    resources: list = Field(default_factory=list)
+    width: StrictInt = Field(ge=1, le=MAX_WIDTH)
+    height: StrictInt = Field(ge=1, le=MAX_HEIGHT)
+    robot_count: StrictInt = Field(ge=0, le=MAX_ARRAY_LENGTHS["robots"])
+    task_count: StrictInt = Field(ge=0, le=MAX_ARRAY_LENGTHS["tasks"])
+    seed: StrictInt = Field(ge=0, le=MAX_SEED)
+    horizon: StrictInt = Field(default=100, ge=0, le=MAX_HORIZON)
+    obstacles: list = Field(default_factory=list, max_length=MAX_ARRAY_LENGTHS["obstacles"])
+    resources: list = Field(default_factory=list, max_length=MAX_ARRAY_LENGTHS["resources"])
 
 
 def validated(value: dict | str):
     try:
-        return loads_instance(value) if isinstance(value, str) else from_dict(value)
+        return parse_web_instance(value)
     except ValueError as error:
         raise HTTPException(422, str(error)) from error
 
@@ -98,7 +102,12 @@ def validate(body: InstanceRequest) -> dict:
 @app.post("/api/instances/generate")
 def generate(body: GenerationRequest) -> dict:
     try:
-        instance = generate_instance(**body.model_dump())
+        parameters = body.model_dump()
+        validate_web_payload_size(parameters)
+        if any(not isinstance(entry, dict) or not isinstance(entry.get("id"), str)
+               or len(entry["id"]) > 100 for entry in parameters["resources"]):
+            raise ValueError("resources: IDs must be strings of at most 100 characters")
+        instance = generate_instance(**parameters)
     except ValueError as error:
         raise HTTPException(422, str(error)) from error
     return preview(instance)

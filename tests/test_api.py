@@ -93,13 +93,17 @@ def test_generation_matches_python_preserves_environment_and_is_reproducible():
     assert actual.json()["instance"]["unavailability"] == []
 
 
-@pytest.mark.parametrize("change", [{"width": 0}, {"robot_count": 0}, {"seed": -1}, {"task_count": 1.5}, {"width": True}])
+@pytest.mark.parametrize("change", [
+    {"width": 0}, {"width": 21}, {"height": 21}, {"robot_count": 0}, {"robot_count": 9},
+    {"task_count": 25}, {"seed": -1}, {"seed": 2_147_483_648}, {"horizon": 301},
+    {"task_count": 1.5}, {"width": True},
+])
 def test_bad_generation_parameters(change):
     body = dict(width=8, height=6, robot_count=3, task_count=10, seed=42)
     assert client.post("/api/instances/generate", json={**body, **change}).status_code == 422
 
 
-@pytest.mark.parametrize("change", [{"strategy": "manual"}, {"strategy": "unknown"}, {"solver_budget": 0}, {"solver_budget": -1}, {"solver_budget": True}, {"solver_budget": "nan"}, {"solver_budget": "1"}, {"arbitrary_path": "private.json"}])
+@pytest.mark.parametrize("change", [{"strategy": "manual"}, {"strategy": "unknown"}, {"solver_budget": 0}, {"solver_budget": -1}, {"solver_budget": 1.01}, {"solver_budget": True}, {"solver_budget": "nan"}, {"solver_budget": "1"}, {"arbitrary_path": "private.json"}])
 def test_bad_execution_parameters(change):
     assert client.post("/api/simulations", json={"instance": data(), **change}).status_code == 422
 
@@ -108,6 +112,61 @@ def test_malformed_http_json():
     response = client.post("/api/simulations", content='{"instance":', headers={"Content-Type": "application/json"})
     assert response.status_code == 422
     assert isinstance(response.json()["detail"], str)
+
+
+@pytest.mark.parametrize(("field", "value", "message"), [
+    ("width", 21, "width"),
+    ("height", 21, "height"),
+    ("horizon", 301, "horizon"),
+    ("robots", [{}] * 9, "robots"),
+    ("tasks", [{}] * 25, "tasks"),
+    ("obstacles", [[]] * 401, "obstacles"),
+    ("resources", [{}] * 31, "resources"),
+    ("unavailability", [{}] * 51, "unavailability"),
+])
+def test_v1_web_limits_reject_before_scientific_parser(monkeypatch, field, value, message):
+    monkeypatch.setattr("api.limits.from_dict", lambda _: pytest.fail("scientific parser was called"))
+    response = client.post("/api/instances/validate", json={"instance": {**data(), field: value}})
+    assert response.status_code == 422
+    assert message in response.json()["detail"]
+
+
+def test_v1_web_limit_preserves_duplicate_json_detection():
+    response = client.post("/api/instances/validate", json={
+        "instance": '{"width":3,"width":4,"height":1,"robots":[],"tasks":[]}',
+    })
+    assert response.status_code == 422
+    assert "duplicate field 'width'" in response.json()["detail"]
+
+
+def test_v1_web_limit_rejects_oversized_raw_json_before_parsing():
+    response = client.post("/api/instances/validate", json={"instance": " " * 100_001})
+    assert response.status_code == 422
+    assert response.json()["detail"] == "Instance exceeds the 100 KB web limit"
+
+
+def test_v1_web_limits_accept_declared_maxima():
+    base = {"width": 20, "height": 20, "horizon": 300, "seed": 2_147_483_647,
+            "robots": [], "tasks": [], "obstacles": [], "resources": [], "unavailability": []}
+    cases = [
+        base,
+        {**base, "robots": [
+            {"id": f"r{i}", "position": [0, 0], "capacity": 1} for i in range(8)
+        ]},
+        {**base, "robots": [{"id": "r", "position": [0, 0], "capacity": 1}], "tasks": [
+            {"id": f"t{i}", "pickup": [0, 0], "destination": [1, 0]} for i in range(24)
+        ]},
+        {**base, "obstacles": [[x, y] for x in range(20) for y in range(20)]},
+        {**base, "resources": [
+            {"id": f"s{i}", "position": [i % 20, i // 20]} for i in range(30)
+        ]},
+        {**base, "robots": [{"id": "r", "position": [0, 0], "capacity": 1}],
+         "unavailability": [
+             {"robot_id": "r", "start_tick": i * 2, "end_tick": i * 2 + 1} for i in range(50)
+         ]},
+    ]
+    for instance in cases:
+        assert client.post("/api/instances/validate", json={"instance": instance}).status_code == 200
 
 
 def test_comparison_matches_m5_and_complex_reference():

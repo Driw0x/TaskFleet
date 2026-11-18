@@ -78,13 +78,15 @@ def from_dict(data: dict) -> Instance:
                                  _integer(entry["capacity"], f"{label}.capacity", 1))
 
     resources = {}
+    resource_positions = set()
     for index, entry in enumerate(_array(data.get("resources", []), "resources")):
         label = f"resources[{index}]"
         entry = _object(entry, {"id", "position"}, {"capacity"}, label)
         resource_id = _id(entry["id"], resources, label)
         position = _position(entry["position"], grid, label)
-        if any(r.position == position for r in resources.values()):
+        if position in resource_positions:
             raise ValueError(f"{label}: only one resource per position is allowed")
+        resource_positions.add(position)
         resources[resource_id] = Resource(
             resource_id, position, _integer(entry.get("capacity", 1), f"{label}.capacity", 1))
 
@@ -170,10 +172,20 @@ def generate_instance(*, width: int, height: int, robot_count: int, task_count: 
                              "robots": [], "tasks": [],
                              "obstacles": [] if obstacles is None else obstacles,
                              "resources": [] if resources is None else resources})
+    if not robot_count:
+        return environment
     grid = environment.grid
     cells = [(x, y) for x in range(width) for y in range(height) if grid.accessible((x, y))]
-    if robot_count and not cells:
+    if not cells:
         raise ValueError("Grille trop petite : aucune case libre pour placer les robots")
+    rng = random.Random(seed)
+    data = environment.to_dict()
+    for index in range(robot_count):
+        data["robots"].append({"id": f"r{index + 1:03d}", "position": list(rng.choice(cells)),
+                               "capacity": rng.randint(1, 3)})
+    if not task_count:
+        return from_dict(data)
+
     # Index components once, without retrying random unreachable endpoints.
     components = {}
     for cell in cells:
@@ -189,11 +201,6 @@ def generate_instance(*, width: int, height: int, robot_count: int, task_count: 
                     components[neighbour] = component
                     component.append(neighbour)
                     frontier.append(neighbour)
-    rng = random.Random(seed)
-    data = environment.to_dict()
-    for index in range(robot_count):
-        data["robots"].append({"id": f"r{index + 1:03d}", "position": list(rng.choice(cells)),
-                               "capacity": rng.randint(1, 3)})
     for index in range(task_count):
         robot = rng.choice(data["robots"])
         component = components[tuple(robot["position"])]

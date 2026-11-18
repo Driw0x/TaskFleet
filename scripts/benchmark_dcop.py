@@ -13,7 +13,7 @@ from taskfleet.allocation import Observation
 from taskfleet.dcop import compare_snapshot, distributed
 from taskfleet.engine import Simulation
 from taskfleet.instances import from_dict, generate_instance
-from taskfleet.ollama import OllamaClient, OllamaConfig
+from taskfleet.ollama import OllamaClient
 
 
 def scenarios(seeds):

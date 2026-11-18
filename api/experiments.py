@@ -23,6 +23,7 @@ from taskfleet.metrics import metrics
 from taskfleet.ollama_selection import resolve_config
 
 from .experiment_planning import run_m7, run_m9
+from .limits import parse_web_instance
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -134,40 +135,12 @@ def _selected_models():
 
 
 def _bounded_instance(data, milestone):
-    # Reject large grids before the scientific parser performs BFS validation.
-    if len(json.dumps(data)) > 100_000:
-        raise ValueError("Instance exceeds the 100 KB web limit")
-    for name in ("width", "height"):
-        if type(data.get(name)) is not int or not 1 <= data[name] <= 20:
-            raise ValueError(f"{name} must be an integer in [1, 20]")
-    arrays = {"robots": 8, "tasks": 24, "obstacles": 400, "resources": 30, "unavailability": 50}
-    for name, maximum in arrays.items():
-        value = data.get(name, [])
-        if not isinstance(value, list) or len(value) > maximum:
-            raise ValueError(f"{name} exceeds the web limit of {maximum}")
-        if name in {"robots", "tasks", "resources"}:
-            if any(not isinstance(entry, dict) or not isinstance(entry.get("id"), str)
-                   or len(entry["id"]) > 100 for entry in value):
-                raise ValueError(f"{name}: IDs must be strings of at most 100 characters")
-        for entry in value:
-            if isinstance(entry, dict):
-                for field in ("capacity", "load", "deadline", "arrival_tick", "start_tick", "end_tick"):
-                    number = entry.get(field)
-                    if type(number) is int and not 0 <= number <= 1_000_000:
-                        raise ValueError(f"{name}.{field}: web values must be in [0, 1000000]")
-    if type(data.get("seed")) is int and not 0 <= data["seed"] <= 2_147_483_647:
-        raise ValueError("seed exceeds the web integer limit")
-    if type(data.get("horizon", 100)) is not int or not 0 <= data.get("horizon", 100) <= 300:
-        raise ValueError("horizon must be an integer in [0, 300]")
-    if any(type(t.get("handling_ticks", 1)) is not int or not 1 <= t.get("handling_ticks", 1) <= 20
-           for t in data.get("tasks", [])):
-        raise ValueError("handling_ticks must be in [1, 20]")
+    instance = parse_web_instance(data)
     if milestone == "m7" and (data["width"] > 6 or data["height"] > 6
             or len(data.get("robots", [])) > 3 or len(data.get("tasks", [])) > 5
             or data.get("horizon", 100) > 60
             or any(t.get("handling_ticks", 1) > 5 for t in data.get("tasks", []))):
         raise ValueError("Scheduling web limit: grid 6x6, 3 robots, 5 tasks, horizon 60, handling 5")
-    instance = from_dict(data)
     if milestone == "m10":
         if instance.horizon > 200:
             raise ValueError("Cooperative learning web horizon is limited to 200 ticks")

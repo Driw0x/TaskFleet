@@ -95,6 +95,8 @@ Ouvrir [l'application](http://127.0.0.1:5173) ou la
 [documentation API](http://127.0.0.1:8000/docs). Vite relaie `/api` vers FastAPI.
 Arrêter chaque serveur avec `Ctrl+C`.
 
+Les requêtes Web V1 sont limitées à 100 Ko, une grille 20 × 20, 8 robots, 24 tâches, 400 obstacles, 30 ressources, 50 périodes d'indisponibilité, un horizon de 300 ticks et un budget CP-SAT d'une seconde déterministe par phase. Les expériences CLI conservent leurs paramètres scientifiques.
+
 La navigation propose **Simulation d’entrepôt** et **Expériences scientifiques**.
 La simulation conserve son éditeur, sa génération, ses trois stratégies et son rejeu.
 Dans les expériences, choisir **Problème**, **Méthode**, **Instance**, puis **Lancer l'expérience**
@@ -236,7 +238,7 @@ Reproduire les benchmarks V2 :
 
 ### Extensions LLM
 
-Après l'[installation optionnelle d'Ollama](#installation-ollama--optionnelle), exécuter depuis
+Après l'[installation optionnelle d'Ollama](#installation-ollama---optionnelle), exécuter depuis
 la racine avec le serveur local actif. Réutiliser la
 [sélection figée](docs/results/v2/ollama-selection-20261015/report.json) : `--selection` vérifie
 le nom exact et le digest du modèle avant exécution ; `--preload` charge le modèle déjà installé
